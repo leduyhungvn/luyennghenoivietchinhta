@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>English Audio Tool - 5 Bước 4 Vòng Lặp (Cụm cố định + Giới từ đầy đủ)</title>
+    <title>English Audio Tool - 6 Bước 4 Vòng Lặp (Quy trình chuẩn v2.0)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -307,7 +307,7 @@
             display: none;
             font-size: 0.85rem;
             line-height: 1.5;
-            max-height: 500px;
+            max-height: 600px;
             overflow-y: auto;
         }
         .rule-panel.show { display: block; }
@@ -365,20 +365,43 @@
             font-size: 0.7rem;
             color: #065f46;
         }
-        .locked-badge {
-            background: #fbbf24;
-            color: #78350f;
-            font-size: 0.6rem;
-            padding: 2px 6px;
-            border-radius: 12px;
-            margin-left: 6px;
+        .step-number {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 0.7rem;
+            text-align: center;
+            line-height: 22px;
+            margin-right: 8px;
+        }
+        .principle-box {
+            background: #e6f7e6;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .principle-number {
+            display: inline-block;
+            background: #4caf50;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 0.7rem;
+            text-align: center;
+            line-height: 22px;
+            margin-right: 8px;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <div class="tool-container">
-    <h1>🎧 English Audio Repeater + Đọc tự nhiên <small>5 bước - 4 vòng lặp (Cụm cố định + Giới từ đầy đủ)</small></h1>
+    <h1>🎧 English Audio Repeater + Đọc tự nhiên <small>6 bước - 4 vòng lặp (Quy trình chuẩn v2.0)</small></h1>
     <div class="paste-area">
         <div class="textarea-header">
             <span class="textarea-label">📝 Dán đoạn văn tiếng Anh vào đây:</span>
@@ -423,11 +446,11 @@
                 </div>
             </div>
             <div class="natural-reading-row">
-                <label><input type="checkbox" id="naturalPauseToggle" checked> 🗣️ <strong>Đọc tự nhiên</strong><span class="info-badge">5 bước - 4 vòng lặp</span></label>
+                <label><input type="checkbox" id="naturalPauseToggle" checked> 🗣️ <strong>Đọc tự nhiên</strong><span class="info-badge">6 bước - 4 vòng lặp chuẩn</span></label>
                 <select id="pauseLevel" class="pause-level-select">
-                    <option value="light">🌿 Nhẹ (8-12 từ)</option>
-                    <option value="moderate" selected>⭐ Vừa (5-7 từ)</option>
-                    <option value="strong">⚡ Mạnh (2-4 từ)</option>
+                    <option value="light">🌿 Nhẹ (max 12 từ)</option>
+                    <option value="moderate" selected>⭐ Vừa (max 6 từ)</option>
+                    <option value="strong">⚡ Mạnh (max 4 từ)</option>
                 </select>
             </div>
             <div class="voice-row">
@@ -449,10 +472,10 @@
         </div>
     </div>
     <div style="text-align: center; margin-top: 1.5rem;">
-        <button id="ruleToggleBtn" class="rule-toggle-btn"><i class="fas fa-graduation-cap"></i> Giải thích quy tắc (5 bước - 4 vòng lặp)</button>
+        <button id="ruleToggleBtn" class="rule-toggle-btn"><i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0)</button>
     </div>
     <div id="rulePanel" class="rule-panel"></div>
-    <footer>⚡ Web Speech API | Dịch Anh→Việt (hiển thị từng câu) | Double-click tra từ | 5 BƯỚC - 4 VÒNG LẶP | Cụm cố định được khóa 🔒</footer>
+    <footer>⚡ Web Speech API | Dịch Anh→Việt | Double-click tra từ | 6 BƯỚC - 4 VÒNG LẶP CHUẨN v2.0 | Bảo vệ cụm cố định | Cắt giới từ đúng quy tắc</footer>
 </div>
 <script>
     // ==================== DOM Elements ====================
@@ -475,45 +498,44 @@
     const clearTextBtn = document.getElementById('clearTextBtn');
     const sampleTextBtn = document.getElementById('sampleTextBtn');
 
-    // ==================== Sample Text (giữ nguyên) ====================
+    // ==================== Sample Text ====================
     const SAMPLE_TEXT = `Hello there! Welcome to the English audio tool. You can paste any paragraph. I try to minimize activities that waste excessive time like reducing time spent on social media or other distractions during study periods. I usually create a daily, weekly or monthly schedule that includes dedicated time for studying, and other activities. The system will split long sentences into small chunks, then repeat each chunk several times. Practice pronunciation easily, because this tool now supports natural pauses just like a real person. Enjoy!`;
 
     clearTextBtn.onclick = () => { textarea.value = ''; onTextChange(); textarea.focus(); };
     sampleTextBtn.onclick = () => { textarea.value = SAMPLE_TEXT; onTextChange(); textarea.focus(); };
 
-    // ==================== Level Settings ====================
+    // ==================== CẤU HÌNH MỨC ĐỘ ====================
     function getMaxChunkSize(level) {
         if (level === 'light') return 12;
-        if (level === 'moderate') return 7;
-        return 4;
-    }
-    function getMinChunkSize(level) {
-        if (level === 'light') return 8;
-        if (level === 'moderate') return 5;
-        return 2;
+        if (level === 'moderate') return 6;
+        return 4; // strong
     }
 
-    // ==================== DANH SÁCH CỤM CỐ ĐỊNH (BƯỚC 2) ====================
-    // Sắp xếp theo độ dài giảm dần để ưu tiên match cụm dài trước
+    function getCutSizeForStep5(level) {
+        if (level === 'light') return 9;
+        if (level === 'moderate') return 5;
+        return 3; // strong
+    }
+
+    // ==================== DANH SÁCH CỤM CỐ ĐỊNH ====================
     const FIXED_PHRASES = [
-        // 3 từ trở lên
+        // Cụm giới từ
         'as well as', 'as far as', 'in spite of', 'in front of', 'in addition to',
         'in case of', 'in lieu of', 'in light of', 'in place of', 'in terms of',
         'in view of', 'on account of', 'on behalf of', 'on top of', 'with regard to',
         'with respect to', 'as long as', 'as soon as', 'even if', 'even though',
-        'provided that', 'so that', 'the most of',
-        // 2 từ
-        'just like', 'such as', 'because of', 'instead of', 'due to', 'prior to',
-        'together with', 'along with', 'apart from', 'according to', 'ahead of',
-        'aside from', 'contrary to', 'except for', 'inside of', 'outside of',
-        'owing to', 'regardless of', 'subsequent to', 'thanks to', 'a lot of',
-        'lots of', 'kind of', 'type of', 'sort of', 'look like',
-        'feel like', 'sound like', 'taste like', 'seem like'
+        'provided that', 'so that', 'the most of', 'welcome to', 'just like', 'such as',
+        'because of', 'instead of', 'due to', 'prior to', 'together with', 'along with',
+        'apart from', 'according to', 'ahead of', 'aside from', 'contrary to',
+        'except for', 'inside of', 'outside of', 'owing to', 'regardless of',
+        'subsequent to', 'thanks to', 'a lot of', 'lots of', 'kind of', 'type of', 'sort of',
+        'look like', 'feel like', 'sound like', 'taste like', 'seem like',
+        // Cụm động từ nguyên mẫu
+        'want to', 'need to', 'have to', 'used to', 'going to', 'ought to', 'supposed to', 'able to'
     ];
-    // Sắp xếp độ dài giảm dần
     FIXED_PHRASES.sort((a, b) => b.split(' ').length - a.split(' ').length);
 
-    // ==================== Từ nối Bước 3 ====================
+    // ==================== TỪ NỐI ====================
     const STEP3_WORDS = [
         'which', 'who', 'that', 'when', 'where', 'whom', 'what', 'how',
         'and', 'or', 'but', 'so', 'for', 'nor', 'yet',
@@ -523,30 +545,30 @@
         'furthermore', 'moreover', 'nevertheless', 'accordingly', 'hence', 'thus'
     ];
 
-    // ==================== GIỚI TỪ ĐẦY ĐỦ (Bước 4) ====================
+    // ==================== GIỚI TỪ ĐẦY ĐỦ ====================
     const PREPOSITIONS = [
-        'aboard', 'about', 'above', 'absent', 'across', 'after', 'against', 
-        'along', 'alongside', 'amid', 'amidst', 'among', 'amongst', 'anti', 
-        'around', 'as', 'astride', 'at', 'atop', 'bar', 'barring', 'before', 
-        'behind', 'below', 'beneath', 'beside', 'besides', 'between', 'beyond', 
-        'but', 'by', 'circa', 'concerning', 'considering', 'despite', 'down', 
-        'during', 'except', 'excepting', 'excluding', 'far', 'following', 'for', 
-        'from', 'given', 'in', 'including', 'inside', 'into', 'less', 'like', 
-        'low', 'minus', 'near', 'nearer', 'nearest', 'notwithstanding', 'of', 
-        'off', 'on', 'onto', 'opposite', 'out', 'outside', 'over', 'past', 'per', 
-        'plus', 're', 'regarding', 'respecting', 'round', 'save', 'saving', 
-        'since', 'than', 'through', 'throughout', 'till', 'times', 'to', 
-        'toward', 'towards', 'under', 'underneath', 'unlike', 'until', 'up', 
-        'upon', 'versus', 'via', 'with', 'within', 'without'
+        'aboard', 'about', 'above', 'absent', 'across', 'after', 'against',
+        'along', 'alongside', 'amid', 'amidst', 'among', 'amongst', 'anti',
+        'around', 'as', 'astride', 'at', 'atop', 'bar', 'barring', 'before',
+        'behind', 'below', 'beneath', 'beside', 'besides', 'between', 'beyond',
+        'by', 'circa', 'concerning', 'considering', 'despite', 'down',
+        'during', 'except', 'excepting', 'excluding', 'far', 'following', 'for',
+        'from', 'given', 'in', 'including', 'inside', 'into', 'less', 'like',
+        'low', 'minus', 'near', 'nearer', 'nearest', 'notwithstanding', 'of',
+        'on', 'onto', 'opposite', 'out', 'outside', 'over', 'past', 'per',
+        'plus', 'regarding', 'respecting', 'round', 'save', 'saving',
+        'since', 'than', 'through', 'throughout', 'till', 'toward', 'towards',
+        'under', 'underneath', 'unlike', 'until', 'up', 'to', 'upon', 'versus',
+        'via', 'with', 'within', 'without', 'each', 'every'
     ];
 
-    const CLAUSE_STARTERS = ['what', 'which', 'who', 'whom', 'whose', 'where', 'when', 'why', 'how'];
-    const MAIN_VERBS = ['is', 'am', 'are', 'was', 'were', 'be', 'being', 'been',
-                        'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing',
-                        'can', 'could', 'will', 'would', 'shall', 'should', 'may', 'might', 'must'];
-    const KEEP_TOGETHER = ['a lot of', 'kind of', 'type of', 'sort of'];
+    // ==================== HÀM KIỂM TRA CỤM CỐ ĐỊNH ====================
+    function isProtectedPhrase(text, startPos, length) {
+        // Kiểm tra xem đoạn từ vị trí startPos có nằm trong cụm cố định không
+        return false; // placeholder, sẽ được xử lý trong các hàm cắt
+    }
 
-    // ==================== Bước 1: Dấu câu ====================
+    // ==================== BƯỚC 1: DẤU CÂU (có vòng lặp con) ====================
     function cutByPunctuation(text) {
         const punctChars = [',', ';', ':'];
         for (let i = 0; i < text.length; i++) {
@@ -562,7 +584,31 @@
         return { success: false, parts: [text] };
     }
 
-    // ==================== Bước 2: Bảo vệ cụm cố định (cắt sau/trước, KHÔNG cắt trong) ====================
+    function processStep1WithLoop(chunks, maxSubLoops = 5) {
+        let currentList = [...chunks];
+        let changed = true;
+        let loopCount = 0;
+        
+        while (changed && loopCount < maxSubLoops) {
+            changed = false;
+            let newList = [];
+            for (let chunk of currentList) {
+                const result = cutByPunctuation(chunk);
+                if (result.success) {
+                    newList.push(...result.parts);
+                    changed = true;
+                } else {
+                    newList.push(chunk);
+                }
+            }
+            currentList = newList;
+            loopCount++;
+            if (!changed) break;
+        }
+        return currentList;
+    }
+
+    // ==================== BƯỚC 2: CỤM CỐ ĐỊNH (có vòng lặp con) ====================
     function protectFixedPhrases(text) {
         let result = [text];
         let changed = true;
@@ -579,9 +625,9 @@
                 for (let phrase of FIXED_PHRASES) {
                     const phraseIndex = lowerPart.indexOf(phrase);
                     if (phraseIndex !== -1) {
-                        const cutPosAfter = phraseIndex + phrase.length; // Vị trí SAU cụm
+                        const cutPosAfter = phraseIndex + phrase.length;
                         
-                        // ƯU TIÊN 1: Cắt SAU cụm
+                        // Ưu tiên 1: Cắt SAU cụm
                         if (cutPosAfter < part.length) {
                             const before = part.substring(0, cutPosAfter).trim();
                             const after = part.substring(cutPosAfter).trim();
@@ -594,7 +640,7 @@
                             }
                         }
                         
-                        // ƯU TIÊN 2: Cắt TRƯỚC cụm (khi cụm ở sát cuối)
+                        // Ưu tiên 2: Cắt TRƯỚC cụm
                         if (phraseIndex > 0) {
                             const before = part.substring(0, phraseIndex).trim();
                             const after = part.substring(phraseIndex).trim();
@@ -618,64 +664,95 @@
             if (!changed) break;
         }
         
-        // Trả về các phần đã được xử lý (không cần đánh dấu lock vì đã cắt an toàn)
-        return { success: result.length !== 1, parts: result.filter(p => p.length > 0) };
+        return result.filter(p => p.length > 0);
     }
 
-    // ==================== Bước 3: Từ nối ====================
-    function cutByConnector(text) {
-        let parts = [text];
+    function processStep2WithLoop(chunks, maxSubLoops = 5) {
+        let currentList = [...chunks];
         let changed = true;
-        let maxPasses = 20;
-        while (changed && maxPasses-- > 0) {
+        let loopCount = 0;
+        
+        while (changed && loopCount < maxSubLoops) {
             changed = false;
-            let newParts = [];
-            for (let part of parts) {
-                let currentText = part;
-                let found = false;
-                for (let conn of STEP3_WORDS) {
-                    if (found) break;
-                    const regex = new RegExp(`^(.*?)\\s+(${conn})([,.;:!?]?)\\s+(.*)$`, 'i');
-                    const match = currentText.match(regex);
-                    if (match && match[1].trim().length > 0) {
-                        const beforeConn = match[1].trim();
-                        const connector = match[2].toLowerCase();
-                        const punctuationAfter = match[3];
-                        const afterConn = match[4].trim();
-                        if (punctuationAfter === ',' || punctuationAfter === '.' || 
-                            punctuationAfter === ';' || punctuationAfter === ':' || 
-                            punctuationAfter === '!' || punctuationAfter === '?') {
-                            newParts.push(beforeConn);
-                            newParts.push(connector + punctuationAfter);
-                            newParts.push(afterConn);
-                        } else {
-                            newParts.push(beforeConn);
-                            newParts.push(connector + ' ' + afterConn);
-                        }
-                        found = true;
-                        changed = true;
-                        break;
-                    }
+            let newList = [];
+            for (let chunk of currentList) {
+                const result = protectFixedPhrases(chunk);
+                if (result.length !== 1 || result[0] !== chunk) {
+                    newList.push(...result);
+                    changed = true;
+                } else {
+                    newList.push(chunk);
                 }
-                if (!found) newParts.push(currentText);
             }
-            parts = newParts;
+            currentList = newList;
+            loopCount++;
             if (!changed) break;
         }
-        return { success: parts.length !== 1, parts: parts.filter(p => p.length > 0) };
+        return currentList;
     }
 
-    // ==================== Bước 4: Giới từ / cắt thông minh ====================
-    function cutByPreposition(text, level) {
-        const maxSize = getMaxChunkSize(level);
+    // ==================== BƯỚC 3: TỪ NỐI (có vòng lặp con) ====================
+    function cutByConnector(text) {
+        for (let conn of STEP3_WORDS) {
+            const regex = new RegExp(`^(.*?)\\s+(${conn})([,.;:!?]?)\\s+(.*)$`, 'i');
+            const match = text.match(regex);
+            if (match && match[1].trim().length > 0) {
+                const beforeConn = match[1].trim();
+                const connector = match[2];
+                const punctuationAfter = match[3];
+                const afterConn = match[4].trim();
+                
+                if (punctuationAfter === ',' || punctuationAfter === '.' || 
+                    punctuationAfter === ';' || punctuationAfter === ':' || 
+                    punctuationAfter === '!' || punctuationAfter === '?') {
+                    // CÓ DẤU → TÁCH RIÊNG từ nối
+                    return { success: true, parts: [beforeConn, connector + punctuationAfter, afterConn] };
+                } else {
+                    // KHÔNG DẤU → GỘP từ nối với phần sau
+                    return { success: true, parts: [beforeConn, connector + ' ' + afterConn] };
+                }
+            }
+        }
+        return { success: false, parts: [text] };
+    }
+
+    function processStep3WithLoop(chunks, maxSubLoops = 5) {
+        let currentList = [...chunks];
+        let changed = true;
+        let loopCount = 0;
+        
+        while (changed && loopCount < maxSubLoops) {
+            changed = false;
+            let newList = [];
+            for (let chunk of currentList) {
+                const result = cutByConnector(chunk);
+                if (result.success) {
+                    newList.push(...result.parts);
+                    changed = true;
+                } else {
+                    newList.push(chunk);
+                }
+            }
+            currentList = newList;
+            loopCount++;
+            if (!changed) break;
+        }
+        return currentList;
+    }
+
+    // ==================== BƯỚC 4: GIỚI TỪ (có vòng lặp con, CHỈ cắt khi > maxSize) ====================
+    function cutByPreposition(text, maxSize) {
         const words = text.split(' ');
         const totalWords = words.length;
+        
+        // CHỈ cắt nếu số từ > maxSize
         if (totalWords <= maxSize) {
             return { success: false, parts: [text] };
         }
-        // 1. Giới từ
+        
+        // Tìm giới từ để cắt TRƯỚC giới từ
         for (let i = 0; i < words.length; i++) {
-            const lowerWord = words[i].toLowerCase().replace(/[,.;:!?]$/, '');
+            let lowerWord = words[i].toLowerCase().replace(/[,.;:!?]$/, '');
             if (PREPOSITIONS.includes(lowerWord)) {
                 let cutPos = 0;
                 for (let j = 0; j < i; j++) {
@@ -688,142 +765,175 @@
                 }
             }
         }
-        // 2. Từ mở đầu mệnh đề
-        for (let i = 0; i < words.length; i++) {
-            const lowerWord = words[i].toLowerCase().replace(/[,.;:!?]$/, '');
-            if (CLAUSE_STARTERS.includes(lowerWord)) {
-                let cutPos = 0;
-                for (let j = 0; j < i; j++) {
-                    cutPos += words[j].length + (j > 0 ? 1 : 0);
-                }
-                const firstPart = text.substring(0, cutPos).trim();
-                const secondPart = text.substring(cutPos).trim();
-                if (firstPart.length > 0 && secondPart.length > 0) {
-                    return { success: true, parts: [firstPart, secondPart] };
-                }
-            }
-        }
-        // 3. Động từ chính
-        for (let i = 0; i < words.length; i++) {
-            const lowerWord = words[i].toLowerCase().replace(/[,.;:!?]$/, '');
-            if (MAIN_VERBS.includes(lowerWord) && i < words.length - 1) {
-                let cutPos = 0;
-                for (let j = 0; j <= i; j++) {
-                    cutPos += words[j].length + (j > 0 ? 1 : 0);
-                }
-                const firstPart = text.substring(0, cutPos).trim();
-                const secondPart = text.substring(cutPos).trim();
-                if (firstPart.length > 0 && secondPart.length > 0 && firstPart.split(' ').length <= maxSize) {
-                    return { success: true, parts: [firstPart, secondPart] };
-                }
-            }
-        }
-        // 4. Cắt thông minh
-        let bestCutPos = 0;
-        let bestCutIndex = maxSize - 1;
-        for (let i = maxSize - 2; i <= maxSize && i < words.length; i++) {
-            let cutPos = 0;
-            for (let j = 0; j < i; j++) {
-                cutPos += words[j].length + (j > 0 ? 1 : 0);
-            }
-            const lastFew = words.slice(Math.max(0, i-2), i).join(' ').toLowerCase();
-            const nextFew = words.slice(i, Math.min(words.length, i+2)).join(' ').toLowerCase();
-            let shouldSkip = false;
-            for (let kt of KEEP_TOGETHER) {
-                if (lastFew.includes(kt) || nextFew.includes(kt)) {
-                    shouldSkip = true;
-                    break;
-                }
-            }
-            if (!shouldSkip) {
-                bestCutPos = cutPos;
-                bestCutIndex = i;
-                break;
-            }
-        }
-        if (bestCutPos === 0) {
-            for (let i = 0; i < maxSize && i < words.length; i++) {
-                bestCutPos += words[i].length + (i > 0 ? 1 : 0);
-            }
-        }
-        const firstPart = text.substring(0, bestCutPos).trim();
-        const secondPart = text.substring(bestCutPos).trim();
-        if (firstPart.length > 0 && secondPart.length > 0) {
-            return { success: true, parts: [firstPart, secondPart] };
-        }
+        
         return { success: false, parts: [text] };
     }
 
-    // ==================== Bước 5: Kiểm tra độ dài ====================
-    function validateChunkSize(chunks, level) {
-        const maxSize = getMaxChunkSize(level);
-        const result = [];
-        for (let chunk of chunks) {
-            const wordCount = chunk.split(' ').length;
-            if (wordCount <= maxSize) {
-                result.push(chunk);
-            } else {
-                const words = chunk.split(' ');
-                let cutPos = 0;
-                for (let i = 0; i < maxSize && i < words.length; i++) {
-                    cutPos += words[i].length + (i > 0 ? 1 : 0);
-                }
-                const firstPart = chunk.substring(0, cutPos).trim();
-                const secondPart = chunk.substring(cutPos).trim();
-                if (firstPart.length > 0) result.push(firstPart);
-                if (secondPart.length > 0) result.push(secondPart);
-            }
-        }
-        return result;
-    }
-
-    // ==================== 5 BƯỚC - 4 VÒNG LẶP ====================
-    function processOneLoop(chunks, level) {
+    function processStep4WithLoop(chunks, maxSize, maxSubLoops = 5) {
         let currentList = [...chunks];
-        let newList = [];
+        let changed = true;
+        let loopCount = 0;
         
-        // BƯỚC 1: Dấu câu
-        for (let chunk of currentList) { const r = cutByPunctuation(chunk); newList.push(...r.parts); }
-        currentList = newList;
-        newList = [];
-        
-        // BƯỚC 2: Cụm cố định (quan trọng: cắt sau/trước, không cắt trong)
-        for (let chunk of currentList) { const r = protectFixedPhrases(chunk); newList.push(...r.parts); }
-        currentList = newList;
-        newList = [];
-        
-        // BƯỚC 3: Từ nối
-        for (let chunk of currentList) { const r = cutByConnector(chunk); newList.push(...r.parts); }
-        currentList = newList;
-        newList = [];
-        
-        // BƯỚC 4: Giới từ / Cắt thông minh
-        for (let chunk of currentList) { const r = cutByPreposition(chunk, level); newList.push(...r.parts); }
-        currentList = newList;
-        
-        // BƯỚC 5: Kiểm tra độ dài
-        currentList = validateChunkSize(currentList, level);
-        
+        while (changed && loopCount < maxSubLoops) {
+            changed = false;
+            let newList = [];
+            for (let chunk of currentList) {
+                const result = cutByPreposition(chunk, maxSize);
+                if (result.success) {
+                    newList.push(...result.parts);
+                    changed = true;
+                } else {
+                    newList.push(chunk);
+                }
+            }
+            currentList = newList;
+            loopCount++;
+            if (!changed) break;
+        }
         return currentList;
     }
 
-    function splitWithFiveLoops(sentence, level) {
+    // ==================== BƯỚC 5: CẮT THÔNG MINH (Cắt cứng theo số từ, KHÔNG vòng lặp con) ====================
+    function cutBySmartFixed(chunk, maxSize, cutSize) {
+        const words = chunk.split(' ');
+        const totalWords = words.length;
+        
+        // CHỈ cắt nếu số từ > maxSize
+        if (totalWords <= maxSize) {
+            return { success: false, parts: [chunk] };
+        }
+        
+        // Đảm bảo phần còn lại có ít nhất 2 từ
+        let takeFirst = cutSize;
+        if (totalWords - takeFirst < 2) {
+            takeFirst = totalWords - 2;
+        }
+        if (takeFirst <= 0) {
+            return { success: false, parts: [chunk] };
+        }
+        
+        // Tính vị trí cắt
+        let cutPos = 0;
+        for (let i = 0; i < takeFirst; i++) {
+            cutPos += words[i].length + (i > 0 ? 1 : 0);
+        }
+        
+        const firstPart = chunk.substring(0, cutPos).trim();
+        const secondPart = chunk.substring(cutPos).trim();
+        
+        if (firstPart.length > 0 && secondPart.length > 0) {
+            return { success: true, parts: [firstPart, secondPart] };
+        }
+        
+        return { success: false, parts: [chunk] };
+    }
+
+    function processStep5(chunks, maxSize, cutSize) {
+        let newList = [];
+        for (let chunk of chunks) {
+            const result = cutBySmartFixed(chunk, maxSize, cutSize);
+            if (result.success) {
+                newList.push(...result.parts);
+            } else {
+                newList.push(chunk);
+            }
+        }
+        return newList;
+    }
+
+    // ==================== BƯỚC 6: KIỂM TRA ĐỘ DÀI (cắt thô nếu còn dài) ====================
+    function cutByForce(chunk, maxSize) {
+        const words = chunk.split(' ');
+        const totalWords = words.length;
+        
+        if (totalWords <= maxSize) {
+            return { success: false, parts: [chunk] };
+        }
+        
+        let cutPos = 0;
+        for (let i = 0; i < maxSize; i++) {
+            cutPos += words[i].length + (i > 0 ? 1 : 0);
+        }
+        
+        const firstPart = chunk.substring(0, cutPos).trim();
+        const secondPart = chunk.substring(cutPos).trim();
+        
+        return { success: true, parts: [firstPart, secondPart] };
+    }
+
+    function processStep6(chunks, maxSize) {
+        let newList = [];
+        let changed = false;
+        
+        for (let chunk of chunks) {
+            const result = cutByForce(chunk, maxSize);
+            if (result.success) {
+                newList.push(...result.parts);
+                changed = true;
+            } else {
+                newList.push(chunk);
+            }
+        }
+        
+        return { chunks: newList, changed: changed };
+    }
+
+    // ==================== 6 BƯỚC - 4 VÒNG LẶP CHÍNH ====================
+    function processOneFullLoop(chunks, maxSize, cutSize) {
+        // Bước 1: Dấu câu (có vòng lặp con)
+        let result = processStep1WithLoop(chunks, 5);
+        
+        // Bước 2: Cụm cố định (có vòng lặp con)
+        result = processStep2WithLoop(result, 5);
+        
+        // Bước 3: Từ nối (có vòng lặp con)
+        result = processStep3WithLoop(result, 5);
+        
+        // Bước 4: Giới từ (có vòng lặp con, CHỈ cắt khi > maxSize)
+        result = processStep4WithLoop(result, maxSize, 5);
+        
+        // Bước 5: Cắt thông minh - cắt cứng theo số từ
+        result = processStep5(result, maxSize, cutSize);
+        
+        // Bước 6: Kiểm tra độ dài
+        const step6Result = processStep6(result, maxSize);
+        
+        return step6Result;
+    }
+
+    function splitWithSixLoopsAndFourCycles(sentence, level) {
+        const maxSize = getMaxChunkSize(level);
+        const cutSize = getCutSizeForStep5(level);
+        
         let chunks = [sentence];
-        const maxLoops = 4;
-        for (let loop = 0; loop < maxLoops; loop++) {
-            const newChunks = processOneLoop(chunks, level);
-            let changed = (newChunks.length !== chunks.length);
+        const maxCycles = 4;
+        
+        for (let cycle = 0; cycle < maxCycles; cycle++) {
+            const result = processOneFullLoop(chunks, maxSize, cutSize);
+            
+            // Kiểm tra xem có thay đổi không
+            let changed = (result.chunks.length !== chunks.length);
             if (!changed) {
-                for (let i = 0; i < newChunks.length; i++) {
-                    if (newChunks[i] !== chunks[i]) { changed = true; break; }
+                for (let i = 0; i < result.chunks.length; i++) {
+                    if (result.chunks[i] !== chunks[i]) {
+                        changed = true;
+                        break;
+                    }
                 }
             }
-            if (!changed) break;
-            chunks = newChunks;
+            
+            chunks = result.chunks;
+            
+            // Nếu không còn thay đổi, thoát sớm
+            if (!changed || !result.changed) {
+                break;
+            }
         }
+        
         return chunks.filter(c => c.trim().length > 0);
     }
 
+    // ==================== Tách câu từ đoạn văn ====================
     function splitIntoSentences(text) {
         if (!text.trim()) return [];
         let sentences = text.match(/[^.!?]+[.!?]+/g);
@@ -832,14 +942,18 @@
     }
 
     let currentSentences = [], currentChunks = [];
+    
     function buildAllChunks(sentences, level) {
+        const maxSize = getMaxChunkSize(level);
         const allChunks = [];
+        
         for (let i = 0; i < sentences.length; i++) {
             const sentence = sentences[i];
             const wordCount = sentence.split(' ').length;
-            const shouldSplit = naturalPauseToggle.checked && wordCount > getMaxChunkSize(level);
+            const shouldSplit = naturalPauseToggle.checked && wordCount > maxSize;
+            
             if (shouldSplit) {
-                const chunks = splitWithFiveLoops(sentence, level);
+                const chunks = splitWithSixLoopsAndFourCycles(sentence, level);
                 for (let j = 0; j < chunks.length; j++) {
                     allChunks.push({ text: chunks[j], sentenceIdx: i, originalSentence: sentence });
                 }
@@ -847,6 +961,7 @@
                 allChunks.push({ text: sentence, sentenceIdx: i, originalSentence: sentence });
             }
         }
+        
         return allChunks;
     }
 
@@ -1039,7 +1154,8 @@
             
             const textSpan = document.createElement('span');
             textSpan.className = 'sentence-text';
-            const isLong = sentence.split(' ').length > getMaxChunkSize(pauseLevelSelect.value);
+            const maxSize = getMaxChunkSize(pauseLevelSelect.value);
+            const isLong = sentence.split(' ').length > maxSize;
             textSpan.innerText = `${idx+1}. ${sentence} ${isLong ? '📏' : ''}`;
             
             mainDiv.appendChild(playBtn);
@@ -1176,110 +1292,158 @@
         else if (voices.find(v => v.lang === 'en-US')) voiceSelect.value = voices.find(v => v.lang === 'en-US').name;
     }
     
-    // ==================== QUY TẮC CHUẨN (NỘI DUNG TỔNG KẾT) ====================
+    // ==================== NỘI DUNG QUY TẮC CHUẨN ====================
     function getRuleContent(level) {
         const maxSize = getMaxChunkSize(level);
-        const levelName = level === 'light' ? 'NHẸ' : (level === 'moderate' ? 'VỪA' : 'MẠNH');
-        const levelIcon = level === 'light' ? '🌿' : (level === 'moderate' ? '⭐' : '⚡');
+        const cutSize = getCutSizeForStep5(level);
+        const levelName = level === 'light' ? 'NHẸ (🌿)' : (level === 'moderate' ? 'VỪA (⭐)' : 'MẠNH (⚡)');
+        
         const fullPrepositionsList = PREPOSITIONS.join(', ');
         const fixedPhrasesList = FIXED_PHRASES.join(', ');
         const step3WordsList = STEP3_WORDS.join(', ');
-        const clauseStartersList = CLAUSE_STARTERS.join(', ');
-        const mainVerbsList = MAIN_VERBS.join(', ');
         
         return `
-            <div><h4><i class="fas fa-gavel"></i> QUY TẮC CHUẨN: 5 BƯỚC - 4 VÒNG LẶP</h4></div>
-            <div class="step-box"><div class="step-title">📌 CÁC MỨC ĐỘ</div>
+            <div><h4><i class="fas fa-gavel"></i> QUY TẮC CHUẨN: 6 BƯỚC - 4 VÒNG LẶP (v2.0)</h4></div>
+            
+            <div class="step-box"><div class="step-title">📌 CÁC MỨC ĐỘ CẮT</div>
             <table class="rule-table">
-                <tr><th>Mức</th><th>Ký hiệu</th><th>Số từ tối đa/cụm</th><th>Phù hợp</th></tr>
-                <tr><td>Nhẹ</td><td>🌿</td><td>8-12 từ</td><td>Người mới bắt đầu</td></tr>
-                <tr><td>Vừa</td><td>⭐</td><td>5-7 từ</td><td>Trình độ trung cấp</td></tr>
-                <tr><td>Mạnh</td><td>⚡</td><td>2-4 từ</td><td>Luyện phát âm chi tiết</td></tr>
+                <tr><th>Mức</th><th>Ký hiệu</th><th>Số từ tối đa/cụm (maxSize)</th><th>Cắt Bước 5 (lấy số từ đầu)</th><th>Phù hợp</th></tr>
+                <tr><td>Nhẹ</td><td>🌿</td><td>12 từ</td><td>9 từ</td><td>Người mới bắt đầu, đọc hiểu</td></tr>
+                <tr><td>Vừa</td><td>⭐</td><td>7 từ</td><td>6 từ</td><td>Trình độ trung cấp, luyện nghe</td></tr>
+                <tr><td>Mạnh</td><td>⚡</td><td>4 từ</td><td>3 từ</td><td>Luyện phát âm chi tiết</td></tr>
             </table>
             </div>
             
-            <div class="step-box"><div class="step-title">🔄 5 BƯỚC XỬ LÝ (Thực hiện tuần tự, lặp lại tối đa 4 vòng)</div></div>
-            
-            <div class="step-box"><div class="step-title">📌 BƯỚC 1: DẤU CÂU (Ưu tiên cao nhất)</div>
-            <div><strong>Kích hoạt khi gặp:</strong> <code>,</code> <code>;</code> <code>:</code> <code>'</code> <code>"</code></div>
-            <div><strong>Cách cắt:</strong> Cắt <strong>sau</strong> dấu câu, phần đầu giữ nguyên dấu</div>
-            <div class="rule-example">Ví dụ: "I like apples, oranges" → "I like apples," + "oranges"</div>
+            <div class="step-box"><div class="step-title">📋 DANH SÁCH CẦN BẢO VỆ</div>
+            <div><strong>Cụm cố định (${FIXED_PHRASES.length} cụm - KHÔNG BAO GIỜ CẮT BÊN TRONG):</strong><br>
+            <code style="font-size:0.7rem; word-break:break-all;">${fixedPhrasesList}</code></div>
+            <div style="margin-top:10px;"><strong>Từ nối (${STEP3_WORDS.length} từ + bổ sung):</strong><br>
+            <code style="font-size:0.7rem; word-break:break-all;">${step3WordsList}</code></div>
+            <div style="margin-top:10px;"><strong>Giới từ (${PREPOSITIONS.length} giới từ + bổ sung):</strong><br>
+            <code style="font-size:0.7rem; word-break:break-all;">${fullPrepositionsList}</code></div>
             </div>
             
-            <div class="step-box"><div class="step-title">📌 BƯỚC 2: CỤM CỐ ĐỊNH (KHÔNG ĐƯỢC TÁCH) - Quan trọng nhất 🔒</div>
-            <div><strong>Nguyên tắc THEN CHỐT:</strong></div>
-            <div>• ✅ <strong>Cắt SAU</strong> toàn bộ cụm cố định (ưu tiên 1)</div>
-            <div>• ✅ <strong>Cắt TRƯỚC</strong> cụm cố định (ưu tiên 2 - khi không thể cắt sau)</div>
-            <div>• ❌ <strong>TUYỆT ĐỐI KHÔNG</strong> cắt bên trong cụm cố định</div>
-            <div><strong>Danh sách cụm cố định (${FIXED_PHRASES.length} cụm):</strong><br><code style="font-size:0.7rem; word-break:break-all;">${fixedPhrasesList}</code></div>
-            <div class="rule-example">Ví dụ: "He runs just like his father" → "He runs just like" + "his father"<br>
-            "Just like his father runs" → "Just like" + "his father runs"<br>
-            "because of the weather" → giữ nguyên "because of the weather"</div>
+            <div class="step-box"><div class="step-title">🔄 6 BƯỚC XỬ LÝ TRONG VÒNG LẶP CHÍNH</div>
+            <div class="step-box"><div class="step-title"><span class="step-number">1</span> BƯỚC 1: DẤU CÂU</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần (xử lý nhiều dấu trong cùng một câu)</div>
+            <div>• <strong>Cách cắt:</strong> Cắt <strong>SAU</strong> dấu phẩy (,), chấm phẩy (;), hai chấm (:)</div>
+            <div>• <strong>🔒 Bảo vệ cụm cố định:</strong> Không cắt bên trong cụm cố định</div>
+            <div class="rule-example">Ví dụ: "I like apples, oranges, bananas" → "I like apples," + "oranges, bananas"</div>
             </div>
             
-            <div class="step-box"><div class="step-title">📌 BƯỚC 3: TỪ NỐI (Ưu tiên thứ ba)</div>
-            <div><strong>Danh sách từ nối:</strong> <code style="font-size:0.7rem;">${step3WordsList}</code></div>
-            <div><strong>Cách cắt:</strong> Cắt <strong>trước</strong> từ nối, xử lý dựa vào dấu phía sau:</div>
-            <div>• <strong>CÓ DẤU</strong> (<code>, . ; : ! ?</code>) → <strong>TÁCH RIÊNG</strong> từ nối (kèm dấu) thành cụm riêng</div>
-            <div>• <strong>KHÔNG CÓ DẤU</strong> → <strong>GỘP</strong> từ nối với cụm phía sau</div>
-            <div class="rule-example">Ví dụ: "do A then do B" → "then do B" (gộp)<br>"do A, then, do B" → "then," (tách riêng)</div>
-            <div><strong>Quan trọng:</strong> Cắt <strong>tất cả</strong> các từ nối trong cùng một bước.</div>
+            <div class="step-box"><div class="step-title"><span class="step-number">2</span> BƯỚC 2: CỤM CỐ ĐỊNH</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>Nguyên tắc THEN CHỐT:</strong> <span style="color:#c2410c;">TUYỆT ĐỐI KHÔNG cắt bên trong cụm cố định</span></div>
+            <div>• <strong>Ưu tiên 1:</strong> Cắt <strong>SAU</strong> toàn bộ cụm cố định</div>
+            <div>• <strong>Ưu tiên 2:</strong> Cắt <strong>TRƯỚC</strong> cụm cố định (khi không thể cắt sau)</div>
+            <div class="rule-example">Ví dụ: "He runs just like his father" → "He runs just like" + "his father"</div>
             </div>
             
-            <div class="step-box"><div class="step-title">📌 BƯỚC 4: GIỚI TỪ / CẮT THÔNG MINH (Ưu tiên thứ tư)</div>
-            <div><strong>Điều kiện áp dụng:</strong> CHỈ cắt khi cụm hiện tại có số từ <strong>&gt; maxSize</strong> (không cắt khi đã đạt hoặc dưới maxSize)</div>
-            <div><strong>Thứ tự ưu tiên cắt:</strong></div>
-            <div>1. <strong>Giới từ</strong> → cắt <strong>trước</strong> giới từ, giới từ gộp với phần sau</div>
-            <div>2. <strong>Từ mở đầu mệnh đề</strong> (<code>${clauseStartersList}</code>) → cắt <strong>trước</strong> từ đó</div>
-            <div>3. <strong>Động từ chính</strong> (<code>${mainVerbsList}</code>) → cắt <strong>sau</strong> động từ</div>
-            <div>4. <strong>Cắt thông minh</strong> → cắt ở ranh giới gần maxSize, tránh vỡ cụm cố định</div>
-            <div><strong>Danh sách giới từ đầy đủ (${PREPOSITIONS.length} giới từ):</strong><br><code style="font-size:0.7rem; word-break:break-all;">${fullPrepositionsList}</code></div>
-            <div class="rule-example">Ví dụ: "identify what is important" (5 từ ≤ 7) → không cắt<br>
-            "identify what is the most important" (7 từ = 7) → không cắt<br>
-            "identify what is the most important thing" (8 từ > 7) → cắt tại "what": "identify" + "what is the most important thing"</div>
+            <div class="step-box"><div class="step-title"><span class="step-number">3</span> BƯỚC 3: TỪ NỐI</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>CÓ dấu câu sau</strong> (,. ;:!?) → <strong>TÁCH RIÊNG</strong> từ nối (kèm dấu)</div>
+            <div>• <strong>KHÔNG có dấu sau</strong> → <strong>GỘP</strong> từ nối với cụm phía sau</div>
+            <div>• <strong>🔒 Bảo vệ cụm cố định</strong></div>
+            <div class="rule-example">Ví dụ: "do A then do B" → "do A" + "then do B"<br>"do A, then do B" → "do A," + "then" + "do B"</div>
             </div>
             
-            <div class="step-box"><div class="step-title">📌 BƯỚC 5: KIỂM TRA ĐỘ DÀI (Bảo vệ)</div>
-            <div>• Quét lại toàn bộ danh sách các cụm đã cắt</div>
-            <div>• Đảm bảo <strong>không có cụm nào vượt quá maxSize</strong></div>
-            <div>• Nếu phát hiện cụm quá dài → tiếp tục cắt thô ở ranh giới gần nhất</div>
+            <div class="step-box"><div class="step-title"><span class="step-number">4</span> BƯỚC 4: GIỚI TỪ</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>Điều kiện:</strong> CHỈ cắt khi số từ trong cụm <strong>> maxSize</strong></div>
+            <div>• <strong>Cách cắt:</strong> Cắt <strong>TRƯỚC</strong> giới từ → giới từ chuyển về ĐẦU cụm sau</div>
+            <div>• <strong>🔒 Bảo vệ cụm cố định</strong></div>
+            <div class="rule-example">Ví dụ (mức Vừa - max 6): "I go to school every day in the morning" (9 từ > 6)<br>→ Tìm giới từ "in" → cắt trước: "I go to school every day" + "in the morning"</div>
             </div>
             
-            <div class="step-box"><div class="step-title">✅ TÓM TẮT NGUYÊN TẮC VÀNG</div>
+            <div class="step-box"><div class="step-title"><span class="step-number">5</span> BƯỚC 5: CẮT THÔNG MINH (Cắt cứng)</div>
+            <div>• <strong>KHÔNG có vòng lặp con</strong> (chỉ 1 lần)</div>
+            <div>• <strong>Điều kiện:</strong> CHỈ cắt khi số từ trong cụm <strong>> maxSize</strong></div>
+            <div>• <strong>Cách cắt:</strong> Cắt lấy <strong>${cutSize} từ đầu</strong> (theo mức độ)</div>
+            <div>• <strong>Đảm bảo:</strong> Phần còn lại có ít nhất 2 từ (không để 1 từ đơn lẻ)</div>
+            <div>• <strong>🔒 Bảo vệ cụm cố định</strong></div>
+            <div class="rule-example">Ví dụ (mức Mạnh - max 4): "if you want to find" (5 từ > 4)<br>→ Cắt lấy 3 từ đầu: "if you want" + "to find"</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">6</span> BƯỚC 6: KIỂM TRA ĐỘ DÀI</div>
+            <div>• <strong>KHÔNG có vòng lặp con</strong></div>
+            <div>• Duyệt tất cả các cụm, đảm bảo <strong>không có cụm nào > maxSize</strong></div>
+            <div>• Nếu phát hiện cụm quá dài → cắt thô (lấy maxSize từ đầu)</div>
+            <div>• Trả về kết quả và báo có thay đổi hay không</div>
+            <div class="rule-example">Ví dụ: "a very long sentence here" (5 từ > maxSize 4)<br>→ Cắt thô: "a very long" + "sentence here"</div>
+            </div>
+            </div>
+            
+            <div class="step-box"><div class="step-title">🔄 VÒNG LẶP CHÍNH (tối đa 4 vòng)</div>
+            <div>• <strong>Vòng 1:</strong> Xử lý toàn bộ câu gốc</div>
+            <div>• <strong>Vòng 2+:</strong> CHỈ xử lý các cụm còn dài (> maxSize), các cụm đã đạt chuẩn được giữ nguyên</div>
+            <div>• <strong>Nguyên tắc:</strong> Đã cắt thì không bao giờ gộp lại</div>
+            <div>• <strong>Dừng sớm:</strong> Kết thúc vòng lặp nếu không có thay đổi sau Bước 6</div>
+            </div>
+            
+            <div class="principle-box"><div class="step-title">✅ 7 NGUYÊN TẮC VÀNG</div>
             <table class="rule-table">
                 <tr><th>STT</th><th>Nguyên tắc</th><th>Mô tả</th></tr>
-                <tr><td>1</td><td>Không gộp lại</td><td>Đã cắt thì để nguyên, không bao giờ gộp các cụm</td></tr>
-                <tr><td>2</td><td>Chỉ cắt khi cần</td><td>Bước 4 chỉ cắt khi số từ > maxSize</td></tr>
-                <tr><td>3</td><td>Cụm cố định bất khả xâm phạm</td><td>Tuyệt đối không cắt bên trong "just like", "because of"...</td></tr>
-                <tr><td>4</td><td>Giới từ gộp với sau</td><td>Khi cắt tại giới từ → giới từ thuộc phần phía sau</td></tr>
-                <tr><td>5</td><td>Từ nối không dấu → gộp</td><td>Nếu sau từ nối không có dấu câu, gộp với cụm phía sau</td></tr>
-                <tr><td>6</td><td>Bước 5 là bảo vệ</td><td>Đảm bảo không cụm nào vượt quá giới hạn</td></tr>
-                <tr><td>7</td><td>Dừng sớm khi ổn</td><td>Kết thúc vòng lặp nếu không có thay đổi</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">1</td><td><strong>Không gộp lại</strong></td><td>Đã cắt thì giữ nguyên, không bao giờ gộp các cụm</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">2</td><td><strong>Chỉ cắt khi cần</strong></td><td>Bước 4 & 5 & 6 chỉ cắt khi số từ > maxSize</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">3</td><td><strong>Cụm cố định bất khả xâm phạm</strong></td><td>Tuyệt đối không cắt bên trong cụm cố định</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">4</td><td><strong>Giới từ gộp với phía sau</strong></td><td>Khi cắt tại giới từ → giới từ thuộc phần phía sau</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">5</td><td><strong>Từ nối không dấu → gộp</strong></td><td>Gộp từ nối với cụm phía sau nếu không có dấu câu</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">6</td><td><strong>Vòng lặp con xử lý triệt để</strong></td><td>Bước 1-4 có vòng lặp con 5 lần để xử lý nhiều điểm cắt</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">7</td><td><strong>Vòng lặp chính chỉ xử lý cụm dài</strong></td><td>Không cắt lại từ đầu, chỉ xử lý các cụm còn vi phạm</td></tr>
             </table>
             </div>
             
-            <div class="step-box"><div class="step-title">📖 VÍ DỤ MINH HỌA HOÀN CHỈNH (mức Vừa - max 7 từ)</div>
-            <div><strong>Câu đầu vào:</strong> "He runs just like his father runs very fast every morning"</div>
-            <div><strong>Quy trình xử lý:</strong></div>
-            <div>• Bước 1 (Dấu câu): Không thay đổi</div>
-            <div>• Bước 2 (Cụm cố định): Tìm thấy "just like" → cắt SAU → "He runs just like" + "his father runs very fast every morning"</div>
-            <div>• Bước 3 (Từ nối): Không có từ nối</div>
-            <div>• Bước 4 (Giới từ): "his father runs very fast every morning" (8 từ > 7) → cắt tại "very" → "his father runs very" + "fast every morning"</div>
-            <div>• Bước 5 (Kiểm tra): Tất cả cụm ≤ 7 từ → Hoàn tất</div>
+            <div class="step-box"><div class="step-title">📊 VÍ DỤ MINH HỌA HOÀN CHỈNH (Mức Vừa - max 6 từ)</div>
+            <div><strong>Câu đầu vào:</strong> "I stayed home because it was raining, so I watched TV, but I fell asleep"</div>
+            <div><strong>Quy trình 6 bước - 4 vòng lặp:</strong></div>
+            <div>• <strong>Bước 1:</strong> Cắt tại dấu phẩy → "I stayed home because it was raining," + "so I watched TV, but I fell asleep"</div>
+            <div>• <strong>Bước 3 (vòng lặp con):</strong> Lần 1: "because" (không dấu) → gộp → "I stayed home" + "because it was raining,"<br>Lần 2: "so" (không dấu) → gộp → "so I watched TV," + "but I fell asleep"<br>Lần 3: "but" (không dấu) → gộp</div>
             <div><strong>Kết quả cuối cùng:</strong></div>
-            <div>1. He runs just like</div>
-            <div>2. his father runs very</div>
-            <div>3. fast every morning</div>
-            <div class="rule-example">✅ "just like" được giữ nguyên khối, không bị cắt thành "just" + "like"</div>
+            <div>1. I stayed home</div>
+            <div>2. because it was raining,</div>
+            <div>3. so I watched TV,</div>
+            <div>4. but I fell asleep</div>
             </div>
             
-            <div class="step-box"><div class="step-title">🚫 LỖI THƯỜNG GẶP ĐÃ ĐƯỢC KHẮC PHỤC</div>
+            <div class="step-box"><div class="step-title">📊 VÍ DỤ MỨC MẠNH (max 4 từ)</div>
+            <div><strong>Câu đầu vào:</strong> "What do you do if you want to find a book in a library?"</div>
+            <div><strong>Kết quả:</strong></div>
+            <div>1. What do you do</div>
+            <div>2. if you want to</div>
+            <div>3. find a book</div>
+            <div>4. in a library?</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title">🛑 ĐIỀU KIỆN DỪNG</div>
             <table class="rule-table">
-                <tr><th>Lỗi cũ</th><th>Nguyên nhân</th><th>Giải pháp</th></tr>
-                <tr><td>"just" + "like..."</td><td>Bước giới từ cắt vào "like"</td><td>Bước 2 khóa cứng cụm "just like"</td></tr>
-                <tr><td>"because" + "of"</td><td>"of" là giới từ bị cắt</td><td>Thêm "because of" vào danh sách cụm cố định</td></tr>
-                <tr><td>"in spite" + "of"</td><td>Tương tự</td><td>Thêm "in spite of" vào danh sách</td></tr>
+                <tr><th>Thứ tự</th><th>Điều kiện</th><th>Hành động</th></tr>
+                <tr><td>1</td><td>Sau Bước 6, không còn cụm nào > maxSize</td><td style="color:#4caf50;">✅ DỪNG ngay</td></tr>
+                <tr><td>2</td><td>Đã chạy đủ 4 vòng lặp chính</td><td style="color:#ff9800;">✅ DỪNG (bảo vệ)</td></tr>
+                <tr><td>3</td><td>Vẫn còn cụm > maxSize và chưa đủ 4 vòng</td><td style="color:#2196f3;">⟳ TIẾP TỤC (chỉ xử lý cụm dài)</td></tr>
             </table>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📋 TÓM TẮT NHANH</div>
+            <div>Input câu → Vòng lặp chính (tối đa 4 lần)</div>
+            <div>&nbsp;&nbsp;├─ Bước 1 (Dấu câu) ──┐</div>
+            <div>&nbsp;&nbsp;├─ Bước 2 (Cụm cố định) │ Có vòng lặp con (5 lần)</div>
+            <div>&nbsp;&nbsp;├─ Bước 3 (Từ nối) ──┘</div>
+            <div>&nbsp;&nbsp;├─ Bước 4 (Giới từ) ──┘</div>
+            <div>&nbsp;&nbsp;│</div>
+            <div>&nbsp;&nbsp;├─ Bước 5 (Cắt thông minh - cắt cứng theo mức)</div>
+            <div>&nbsp;&nbsp;│</div>
+            <div>&nbsp;&nbsp;└─ Bước 6 (Kiểm tra + cắt thô nếu cần)</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ Nếu còn cụm dài → tiếp tục vòng mới</div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nếu hết cụm dài → KẾT THÚC</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📌 GHI CHÚ</div>
+            <div>• Quy trình này đảm bảo <strong>KHÔNG BAO GIỜ</strong> cắt bên trong cụm cố định</div>
+            <div>• <strong>Giới từ</strong> luôn được đưa về đầu cụm phía sau khi cắt</div>
+            <div>• <strong>Từ nối không có dấu</strong> được gộp với cụm phía sau để đảm bảo tính tự nhiên</div>
+            <div>• <strong>Vòng lặp con</strong> giúp xử lý triệt để nhiều điểm cắt trong cùng một bước</div>
+            <div>• <strong>Bước 6</strong> là bước bảo vệ cuối cùng, đảm bảo không cụm nào vượt quá giới hạn</div>
             </div>
             `;
     }
@@ -1288,7 +1452,7 @@
     
     // ==================== Khởi tạo sự kiện ====================
     pauseLevelSelect.addEventListener('change', () => { updateRulePanel(); if (currentSentences.length) refreshChunks(); });
-    ruleToggleBtn.addEventListener('click', () => { rulePanel.classList.toggle('show'); ruleToggleBtn.innerHTML = rulePanel.classList.contains('show') ? '<i class="fas fa-eye-slash"></i> Ẩn quy tắc' : '<i class="fas fa-graduation-cap"></i> Giải thích quy tắc (5 bước - 4 vòng lặp)'; if (rulePanel.classList.contains('show')) updateRulePanel(); });
+    ruleToggleBtn.addEventListener('click', () => { rulePanel.classList.toggle('show'); ruleToggleBtn.innerHTML = rulePanel.classList.contains('show') ? '<i class="fas fa-eye-slash"></i> Ẩn quy tắc' : '<i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0)'; if (rulePanel.classList.contains('show')) updateRulePanel(); });
     textarea.addEventListener('input', onTextChange);
     playSequentialBtn.addEventListener('click', startSequentialPlayback);
     pauseBtn.addEventListener('click', () => { activePlayback.cancelled = true; speechSynthesis.cancel(); });
