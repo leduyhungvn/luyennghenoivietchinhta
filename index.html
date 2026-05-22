@@ -2,21 +2,18 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>English Audio Tool - 6 Bước 4 Vòng Lặp (Quy trình chuẩn v2.0) | Bảo vệ động + Cắt đúng</title>
-    <meta name="google" content="notranslate">
-    <meta http-equiv="Content-Language" content="en">
     <style>
         * {
             box-sizing: border-box;
             font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
         body {
             background: linear-gradient(145deg, #f6f9fc 0%, #eef2f5 100%);
             margin: 0;
             min-height: 100vh;
-            padding: 1rem;
+            padding: 2rem 1.5rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,10 +25,10 @@
             backdrop-filter: blur(2px);
             border-radius: 2rem;
             box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25);
-            padding: 1.2rem;
+            padding: 1.8rem 2rem;
         }
         h1 {
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             font-weight: 600;
             margin-top: 0;
             margin-bottom: 1rem;
@@ -42,10 +39,10 @@
             flex-wrap: wrap;
         }
         h1 small {
-            font-size: 0.65rem;
+            font-size: 0.8rem;
             font-weight: normal;
             background: #d9e8f5;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 40px;
             color: #0c4e6e;
         }
@@ -53,7 +50,7 @@
             background: white;
             border-radius: 1.5rem;
             padding: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border: 1px solid #e2edf2;
         }
@@ -70,26 +67,24 @@
         .small-btn {
             background: #eef2ff;
             border: none;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 30px;
             font-size: 0.75rem;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            transition: 0.1s;
-            touch-action: manipulation;
         }
-        .small-btn:active { transform: scale(0.96); background: #d9e6f7; }
+        .small-btn:hover { background: #d9e6f7; transform: scale(1.02); }
         .small-btn.clear-btn { background: #fee2e2; color: #c2410c; }
         .small-btn.sample-btn { background: #e6f7e6; color: #2d6a2d; }
         textarea {
             width: 100%;
             border-radius: 1.2rem;
             border: 1px solid #cbdbe0;
-            padding: 1rem;
+            padding: 1rem 1.2rem;
             font-size: 1rem;
-            line-height: 1.4;
+            line-height: 1.5;
             font-family: monospace;
             resize: vertical;
         }
@@ -100,7 +95,7 @@
         }
         .cards-grid {
             display: grid;
-            gap: 1.2rem;
+            gap: 1.8rem;
             grid-template-columns: 1fr;
         }
         @media (min-width: 800px) {
@@ -109,7 +104,7 @@
         .card {
             background: white;
             border-radius: 1.5rem;
-            padding: 1rem 1.2rem;
+            padding: 1.2rem 1.4rem;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             border: 1px solid #eef2f8;
             display: flex;
@@ -117,9 +112,9 @@
         }
         .card h3 {
             margin-top: 0;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #1f3a4b;
             border-left: 5px solid #3b82f6;
             padding-left: 0.7rem;
@@ -128,46 +123,41 @@
             justify-content: space-between;
         }
         .card h3 .card-icon-action {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             cursor: pointer;
             background: #eef2ff;
-            padding: 5px 10px;
+            padding: 6px 10px;
             border-radius: 40px;
-            touch-action: manipulation;
         }
-        .card h3 .card-icon-action:active { background: #d9e6f7; transform: scale(0.96); }
         .audio-row {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 12px;
             background: #f8fafc;
-            padding: 10px 14px;
+            padding: 12px 14px;
             border-radius: 60px;
         }
         .audio-btn {
             background: #f1f5f9;
             border: none;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 60px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: #1e293b;
-            transition: 0.1s;
-            touch-action: manipulation;
-            box-shadow: 2px 2px 6px #b8c3d0;
         }
-        .audio-btn:active { background: #cbd5e1; transform: scale(0.95); box-shadow: inset 2px 2px 4px #b8c3d0; }
+        .audio-btn:hover { background: #e2e8f0; transform: scale(1.02); }
         .select-small {
             background: white;
             border: 1px solid #cbd5e1;
             border-radius: 40px;
-            padding: 8px 12px;
+            padding: 8px 16px;
             font-size: 0.85rem;
             font-weight: 500;
             cursor: pointer;
@@ -180,7 +170,7 @@
             flex-wrap: wrap;
         }
         .voice-row label { font-weight: 600; color: #0f3b4f; }
-        #voiceSelect { flex: 2; min-width: 180px; border-radius: 60px; padding: 8px 12px; }
+        #voiceSelect { flex: 2; min-width: 180px; border-radius: 60px; padding: 8px 16px; }
         .natural-reading-row {
             margin-top: 10px;
             padding: 8px 14px;
@@ -191,7 +181,7 @@
             align-items: center;
             gap: 16px;
         }
-        .natural-reading-row label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 500; touch-action: manipulation; }
+        .natural-reading-row label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 500; }
         .natural-reading-row input { width: 18px; height: 18px; cursor: pointer; }
         .pause-level-select { padding: 6px 12px; border-radius: 30px; border: 1px solid #b8d9b0; background: white; cursor: pointer; }
         .copy-text {
@@ -232,34 +222,29 @@
             border: none;
             font-size: 1.4rem;
             cursor: pointer;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: 0.1s;
-            touch-action: manipulation;
-            box-shadow: 2px 2px 4px #b8c3d0;
         }
-        .sentence-play:active { background: #c7d2fe; transform: scale(0.94); box-shadow: inset 2px 2px 4px #b8c3d0; }
+        .sentence-play:hover { background: #d9e6f7; }
         .sentence-text { flex: 1; font-size: 0.95rem; line-height: 1.4; color: #1e2f3d; }
         .chunk-list-play-btn {
             background: #e0e7ff;
             border: none;
             font-size: 1rem;
             cursor: pointer;
-            width: 44px;
-            height: 44px;
+            width: 34px;
+            height: 34px;
             border-radius: 50px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: #1e3a5f;
-            touch-action: manipulation;
-            box-shadow: 2px 2px 4px #b8c3d0;
         }
-        .chunk-list-play-btn:active { background: #c7d2fe; transform: scale(0.94); box-shadow: inset 2px 2px 4px #b8c3d0; }
+        .chunk-list-play-btn:hover { background: #c7d2fe; }
         .chunk-list {
             display: flex;
             flex-wrap: wrap;
@@ -271,15 +256,13 @@
         }
         .chunk-badge {
             background: #e8f0fe;
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
             color: #1e5a8a;
             cursor: pointer;
-            transition: 0.1s;
-            touch-action: manipulation;
         }
-        .chunk-badge:active { background: #cbdff5; transform: scale(0.96); }
+        .chunk-badge:hover { background: #d0e0f5; }
         .dict-popup {
             position: fixed;
             z-index: 10000;
@@ -296,9 +279,9 @@
         .dict-popup .dict-phonetic { color: #4b6e8a; font-family: monospace; margin: 5px 0; }
         .dict-popup .dict-meaning { margin: 10px 0; color: #1e2a3e; }
         .dict-popup .dict-example { font-style: italic; background: #f1f5f9; padding: 6px; border-radius: 12px; margin: 8px 0; font-size: 0.85rem; }
-        .dict-popup .close-dict { background: #eef2ff; border: none; border-radius: 30px; padding: 4px 10px; cursor: pointer; font-size: 0.7rem; float: right; touch-action: manipulation; }
+        .dict-popup .close-dict { background: #eef2ff; border: none; border-radius: 30px; padding: 4px 10px; cursor: pointer; font-size: 0.7rem; float: right; }
         .dict-error { color: #c2410c; text-align: center; }
-        footer { font-size: 0.7rem; text-align: center; margin-top: 1.2rem; color: #5b6e8c; }
+        footer { font-size: 0.75rem; text-align: center; margin-top: 1.5rem; color: #5b6e8c; }
         .translation-loading { color: #3b82f6; font-style: italic; }
         .translation-error { color: #c2410c; background: #fff1f0; border-radius: 1rem; padding: 0.5rem; }
         .info-badge { background: #e6f7e6; border-radius: 20px; padding: 4px 10px; font-size: 0.7rem; color: #2d6a2d; }
@@ -313,11 +296,8 @@
             align-items: center;
             gap: 8px;
             margin-top: 1rem;
-            width: 100%;
-            justify-content: center;
-            touch-action: manipulation;
         }
-        .rule-toggle-btn:active { background: #d9e6f7; transform: scale(0.98); }
+        .rule-toggle-btn:hover { background: #d9e6f7; }
         .rule-panel {
             background: #fefce8;
             border: 1px solid #e5e0b0;
@@ -333,11 +313,13 @@
         .rule-panel.show { display: block; }
         .rule-panel h4 { margin-top: 0; color: #8a6e1e; }
         .rule-example { background: #f0f0d0; padding: 8px 12px; border-radius: 12px; font-family: monospace; margin: 10px 0; }
+        .current-level-badge { background: #4caf50; color: white; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem; }
         .step-box { background: #e8f0fe; padding: 8px 12px; border-radius: 12px; margin: 10px 0; border-left: 4px solid #3b82f6; }
         .step-title { font-weight: bold; color: #1e3a5f; }
         .rule-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
         .rule-table td, .rule-table th { border: 1px solid #ddd; padding: 6px; text-align: left; vertical-align: top; }
         .rule-table th { background: #e5e0b0; }
+        
         .translation-item {
             background: #f0fdf4;
             border-radius: 1rem;
@@ -410,6 +392,13 @@
             font-size: 0.65rem;
             margin-left: 8px;
         }
+        .protected-boundary {
+            border-bottom: 2px dotted #c2410c;
+        }
+        .default-voice-option {
+            background: #e8f0fe;
+            font-weight: bold;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -430,7 +419,7 @@
     <div class="cards-grid">
         <div class="card">
             <h3><i class="fas fa-sliders-h"></i> 1. Điều khiển phát</h3>
-            <div class="audio-row">
+            <div class="audio-row" style="flex-wrap: wrap; gap: 10px;">
                 <button id="playSequentialBtn" class="audio-btn"><i class="fas fa-volume-up"></i></button>
                 <button id="pauseBtn" class="audio-btn"><i class="fas fa-pause"></i></button>
                 <button id="stopBtn" class="audio-btn"><i class="fas fa-stop"></i></button>
@@ -469,7 +458,9 @@
             </div>
             <div class="voice-row">
                 <label><i class="fas fa-microphone-alt"></i> Giọng đọc:</label>
-                <select id="voiceSelect" class="select-small"></select>
+                <select id="voiceSelect" class="select-small">
+                    <option value="default" selected>📱 Mặc định (giọng hệ thống)</option>
+                </select>
             </div>
         </div>
         <div class="card">
@@ -489,9 +480,8 @@
         <button id="ruleToggleBtn" class="rule-toggle-btn"><i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0 + Bảo vệ động)</button>
     </div>
     <div id="rulePanel" class="rule-panel"></div>
-    <footer>⚡ Web Speech API | Dịch Anh→Việt | Double-click tra từ | 6 BƯỚC - 4 VÒNG LẶP CHUẨN v2.0 | Bảo vệ cụm cố định | Bảo vệ động (1 từ + cụm gốc)</footer>
+    <footer>⚡ Web Speech API | Dịch Anh→Việt | Double-click tra từ | 6 BƯỚC - 4 VÒNG LẶP CHUẨN v2.0 | Bảo vệ cụm cố định | Bảo vệ động (1 từ + cụm gốc) - KHÔNG chặn cắt đầu/cuối cụm</footer>
 </div>
-
 <script>
     // ==================== DOM Elements ====================
     const textarea = document.getElementById('inputText');
@@ -519,8 +509,8 @@
     clearTextBtn.onclick = () => { textarea.value = ''; onTextChange(); textarea.focus(); };
     sampleTextBtn.onclick = () => { textarea.value = SAMPLE_TEXT; onTextChange(); textarea.focus(); };
 
-    // ==================== DANH SÁCH BẢO VỆ ĐỘNG ====================
-    let protectedBoundaries = [];
+    // ==================== DANH SÁCH BẢO VỆ ĐỘNG (lưu các ranh giới không được cắt) ====================
+    let protectedBoundaries = [];  // Lưu các chuỗi con không được phép cắt bên trong (ví dụ: "need to", "teenagers need to")
 
     function addProtectedBoundary(phrase) {
         if (!protectedBoundaries.includes(phrase.toLowerCase())) {
@@ -532,14 +522,20 @@
         protectedBoundaries = [];
     }
 
+    // Hàm kiểm tra một vị trí cắt có nằm bên trong ranh giới bảo vệ không
     function isCutInsideProtectedBoundary(text, cutPos) {
         if (!text || cutPos <= 0 || cutPos >= text.length) return false;
+        
         const lowerText = text.toLowerCase();
+        
         for (let boundary of protectedBoundaries) {
             const idx = lowerText.indexOf(boundary);
             if (idx !== -1) {
+                // Ranh giới bảo vệ nằm trong text
                 const boundaryStart = idx;
                 const boundaryEnd = idx + boundary.length;
+                
+                // Nếu vị trí cắt nằm BÊN TRONG ranh giới bảo vệ -> không được cắt
                 if (cutPos > boundaryStart && cutPos < boundaryEnd) {
                     return true;
                 }
@@ -552,13 +548,13 @@
     function getMaxChunkSize(level) {
         if (level === 'light') return 12;
         if (level === 'moderate') return 6;
-        return 4;
+        return 4; // strong
     }
 
     function getCutSizeForStep5(level) {
         if (level === 'light') return 9;
         if (level === 'moderate') return 5;
-        return 3;
+        return 3; // strong
     }
 
     // ==================== DANH SÁCH CỤM CỐ ĐỊNH GỐC ====================
@@ -573,10 +569,13 @@
         'except for', 'inside of', 'outside of', 'owing to', 'regardless of',
         'subsequent to', 'thanks to', 'a lot of', 'lots of', 'kind of', 'type of', 'sort of',
         'look like', 'feel like', 'sound like', 'taste like', 'seem like',
-        'want to', 'need to', 'have to', 'used to', 'going to', 'ought to', 'supposed to', 'able to', 'wants to', 'needs to', 'has to', 'wanted to', 'needed to', 'had to', 'looks like', 'feels like', 'sounds like', 'tastes like', 'seems like', 'such that', 'proud of', 'more than'
+        'want to', 'need to', 'have to', 'used to', 'going to', 'ought to', 'supposed to', 'able to', 'wants to', 'needs to', 'has to', 'wanted to', 'needed to', 'had to',  'looks like', 'feels like', 'sounds like', 'tastes like', 'seems like', 'looked like', 'felt like', 'sounded like', 'tasted like', 'seemed like', 'such that', 'proud of', 'excepted for', 'excepts for', 'more than'
+
+
     ];
     FIXED_PHRASES.sort((a, b) => b.split(' ').length - a.split(' ').length);
 
+    // Khởi tạo ranh giới bảo vệ từ danh sách gốc
     for (let phrase of FIXED_PHRASES) {
         addProtectedBoundary(phrase);
     }
@@ -608,13 +607,16 @@
         'via', 'with', 'within', 'without', 'each', 'every'
     ];
 
-    // ==================== 6 BƯỚC - 4 VÒNG LẶP ====================
+    // ==================== BƯỚC 1: DẤU CÂU (có vòng lặp con, kiểm tra ranh giới) ====================
     function cutByPunctuation(text) {
         const punctChars = [',', ';', ':'];
         for (let i = 0; i < text.length; i++) {
             if (punctChars.includes(text[i])) {
                 const cutPos = i + 1;
-                if (isCutInsideProtectedBoundary(text, cutPos)) continue;
+                // Kiểm tra không cắt bên trong ranh giới bảo vệ
+                if (isCutInsideProtectedBoundary(text, cutPos)) {
+                    continue;
+                }
                 const firstPart = text.substring(0, cutPos).trim();
                 const secondPart = text.substring(cutPos).trim();
                 if (firstPart.length > 0 && secondPart.length > 0) {
@@ -629,6 +631,7 @@
         let currentList = [...chunks];
         let changed = true;
         let loopCount = 0;
+        
         while (changed && loopCount < maxSubLoops) {
             changed = false;
             let newList = [];
@@ -643,34 +646,50 @@
             }
             currentList = newList;
             loopCount++;
+            if (!changed) break;
         }
         return currentList;
     }
 
+    // ==================== BƯỚC 2: CỤM CỐ ĐỊNH (tạo ranh giới bảo vệ động) ====================
     function protectFixedPhrases(text) {
         let result = [text];
         let changed = true;
         let maxPasses = 10;
+        
         while (changed && maxPasses-- > 0) {
             changed = false;
             let newParts = [];
+            
             for (let part of result) {
                 let found = false;
                 const lowerPart = part.toLowerCase();
+                
                 for (let phrase of FIXED_PHRASES) {
                     const phraseIndex = lowerPart.indexOf(phrase);
                     if (phraseIndex !== -1) {
+                        // Đếm số từ ở phía trước cụm
                         const beforeText = part.substring(0, phraseIndex).trim();
                         const beforeWords = beforeText.length > 0 ? beforeText.split(/\s+/).length : 0;
                         
+                        // TRƯỜNG HỢP ĐẶC BIỆT: phía trước có đúng 1 từ
+                        // → GỘP 1 từ đó với cụm cố định thành 1 cụm BẢO VỆ ĐỘNG
                         if (beforeWords === 1 && phraseIndex > 0) {
+                            // Lấy vị trí bắt đầu của 1 từ phía trước
                             const lastSpaceBefore = part.lastIndexOf(' ', phraseIndex - 1);
                             const startPos = (lastSpaceBefore === -1) ? 0 : lastSpaceBefore + 1;
+                            
+                            // Tạo ranh giới bảo vệ động mới
                             const oneWord = part.substring(startPos, phraseIndex).trim();
                             const combinedPhrase = oneWord + ' ' + phrase;
+                            
+                            // THÊM VÀO DANH SÁCH RANH GIỚI BẢO VỆ
                             addProtectedBoundary(combinedPhrase);
+                            
+                            // Cắt SAU cụm đã gộp
                             const combinedLength = combinedPhrase.length;
                             const cutPosAfterCombined = startPos + combinedLength;
+                            
                             if (cutPosAfterCombined < part.length) {
                                 const before = part.substring(0, cutPosAfterCombined).trim();
                                 const after = part.substring(cutPosAfterCombined).trim();
@@ -684,41 +703,54 @@
                             } else {
                                 newParts.push(part);
                                 found = true;
+                                changed = false;
                                 break;
                             }
                         }
                         
+                        // TRƯỜNG HỢP THÔNG THƯỜNG: Cắt SAU cụm
                         const cutPosAfter = phraseIndex + phrase.length;
-                        if (cutPosAfter < part.length && !isCutInsideProtectedBoundary(part, cutPosAfter)) {
-                            const before = part.substring(0, cutPosAfter).trim();
-                            const after = part.substring(cutPosAfter).trim();
-                            if (before.length > 0 && after.length > 0) {
-                                newParts.push(before);
-                                newParts.push(after);
-                                found = true;
-                                changed = true;
-                                break;
+                        if (cutPosAfter < part.length) {
+                            // Kiểm tra không cắt bên trong ranh giới bảo vệ
+                            if (!isCutInsideProtectedBoundary(part, cutPosAfter)) {
+                                const before = part.substring(0, cutPosAfter).trim();
+                                const after = part.substring(cutPosAfter).trim();
+                                if (before.length > 0 && after.length > 0) {
+                                    newParts.push(before);
+                                    newParts.push(after);
+                                    found = true;
+                                    changed = true;
+                                    break;
+                                }
                             }
                         }
                         
-                        if (beforeWords > 1 && phraseIndex > 0 && !isCutInsideProtectedBoundary(part, phraseIndex)) {
-                            const before = part.substring(0, phraseIndex).trim();
-                            const after = part.substring(phraseIndex).trim();
-                            if (before.length > 0 && after.length > 0) {
-                                newParts.push(before);
-                                newParts.push(after);
-                                found = true;
-                                changed = true;
-                                break;
+                        // TRƯỜNG HỢP KHÁC: Cắt TRƯỚC cụm (khi phía trước có nhiều hơn 1 từ)
+                        if (beforeWords > 1 && phraseIndex > 0) {
+                            if (!isCutInsideProtectedBoundary(part, phraseIndex)) {
+                                const before = part.substring(0, phraseIndex).trim();
+                                const after = part.substring(phraseIndex).trim();
+                                if (before.length > 0 && after.length > 0) {
+                                    newParts.push(before);
+                                    newParts.push(after);
+                                    found = true;
+                                    changed = true;
+                                    break;
+                                }
                             }
                         }
                     }
                 }
-                if (!found) newParts.push(part);
+                
+                if (!found) {
+                    newParts.push(part);
+                }
             }
+            
             result = newParts;
             if (!changed) break;
         }
+        
         return result.filter(p => p.length > 0);
     }
 
@@ -726,6 +758,7 @@
         let currentList = [...chunks];
         let changed = true;
         let loopCount = 0;
+        
         while (changed && loopCount < maxSubLoops) {
             changed = false;
             let newList = [];
@@ -740,10 +773,12 @@
             }
             currentList = newList;
             loopCount++;
+            if (!changed) break;
         }
         return currentList;
     }
 
+    // ==================== BƯỚC 3: TỪ NỐI (có vòng lặp con, kiểm tra ranh giới) ====================
     function cutByConnector(text) {
         for (let conn of STEP3_WORDS) {
             const regex = new RegExp(`^(.*?)\\s+(${conn})([,.;:!?]?)\\s+(.*)$`, 'i');
@@ -753,10 +788,27 @@
                 const connector = match[2];
                 const punctuationAfter = match[3];
                 const afterConn = match[4].trim();
-                const cutPos = beforeConn.length + 1;
-                if (isCutInsideProtectedBoundary(text, cutPos)) continue;
-                let parts = punctuationAfter ? [beforeConn, connector + punctuationAfter, afterConn] : [beforeConn, connector + ' ' + afterConn];
-                if (parts.every(p => p.length > 0)) return { success: true, parts };
+                
+                // Xác định vị trí cắt
+                const cutPos = beforeConn.length + 1; // +1 cho khoảng trắng
+                
+                // Kiểm tra không cắt bên trong ranh giới bảo vệ
+                if (isCutInsideProtectedBoundary(text, cutPos)) {
+                    continue;
+                }
+                
+                let parts = [];
+                if (punctuationAfter === ',' || punctuationAfter === '.' || 
+                    punctuationAfter === ';' || punctuationAfter === ':' || 
+                    punctuationAfter === '!' || punctuationAfter === '?') {
+                    parts = [beforeConn, connector + punctuationAfter, afterConn];
+                } else {
+                    parts = [beforeConn, connector + ' ' + afterConn];
+                }
+                
+                if (parts.every(p => p.length > 0)) {
+                    return { success: true, parts: parts };
+                }
             }
         }
         return { success: false, parts: [text] };
@@ -766,6 +818,7 @@
         let currentList = [...chunks];
         let changed = true;
         let loopCount = 0;
+        
         while (changed && loopCount < maxSubLoops) {
             changed = false;
             let newList = [];
@@ -780,24 +833,41 @@
             }
             currentList = newList;
             loopCount++;
+            if (!changed) break;
         }
         return currentList;
     }
 
+    // ==================== BƯỚC 4: GIỚI TỪ (CHỈ cắt khi > maxSize, kiểm tra ranh giới) ====================
     function cutByPreposition(text, maxSize) {
         const words = text.split(' ');
-        if (words.length <= maxSize) return { success: false, parts: [text] };
+        const totalWords = words.length;
+        
+        if (totalWords <= maxSize) {
+            return { success: false, parts: [text] };
+        }
+        
         for (let i = 0; i < words.length; i++) {
             let lowerWord = words[i].toLowerCase().replace(/[,.;:!?]$/, '');
             if (PREPOSITIONS.includes(lowerWord)) {
                 let cutPos = 0;
-                for (let j = 0; j < i; j++) cutPos += words[j].length + (j > 0 ? 1 : 0);
-                if (isCutInsideProtectedBoundary(text, cutPos)) continue;
+                for (let j = 0; j < i; j++) {
+                    cutPos += words[j].length + (j > 0 ? 1 : 0);
+                }
+                
+                // Kiểm tra không cắt bên trong ranh giới bảo vệ
+                if (isCutInsideProtectedBoundary(text, cutPos)) {
+                    continue;
+                }
+                
                 const firstPart = text.substring(0, cutPos).trim();
                 const secondPart = text.substring(cutPos).trim();
-                if (firstPart.length > 0 && secondPart.length > 0) return { success: true, parts: [firstPart, secondPart] };
+                if (firstPart.length > 0 && secondPart.length > 0) {
+                    return { success: true, parts: [firstPart, secondPart] };
+                }
             }
         }
+        
         return { success: false, parts: [text] };
     }
 
@@ -805,6 +875,7 @@
         let currentList = [...chunks];
         let changed = true;
         let loopCount = 0;
+        
         while (changed && loopCount < maxSubLoops) {
             changed = false;
             let newList = [];
@@ -819,33 +890,55 @@
             }
             currentList = newList;
             loopCount++;
+            if (!changed) break;
         }
         return currentList;
     }
 
+    // ==================== BƯỚC 5: CẮT THÔNG MINH (cắt cứng, kiểm tra ranh giới) ====================
     function cutBySmartFixed(chunk, maxSize, cutSize) {
         const words = chunk.split(' ');
-        if (words.length <= maxSize) return { success: false, parts: [chunk] };
+        const totalWords = words.length;
+        
+        if (totalWords <= maxSize) {
+            return { success: false, parts: [chunk] };
+        }
+        
         let takeFirst = cutSize;
-        if (words.length - takeFirst < 2) takeFirst = words.length - 2;
-        if (takeFirst <= 0) return { success: false, parts: [chunk] };
+        if (totalWords - takeFirst < 2) {
+            takeFirst = totalWords - 2;
+        }
+        if (takeFirst <= 0) {
+            return { success: false, parts: [chunk] };
+        }
+        
         let cutPos = 0;
-        for (let i = 0; i < takeFirst; i++) cutPos += words[i].length + (i > 0 ? 1 : 0);
+        for (let i = 0; i < takeFirst; i++) {
+            cutPos += words[i].length + (i > 0 ? 1 : 0);
+        }
+        
+        // Kiểm tra không cắt bên trong ranh giới bảo vệ
         if (isCutInsideProtectedBoundary(chunk, cutPos)) {
+            // Thử cắt với số từ khác
             for (let tryTake = takeFirst - 1; tryTake >= Math.floor(takeFirst / 2); tryTake--) {
                 let tryCutPos = 0;
-                for (let i = 0; i < tryTake; i++) tryCutPos += words[i].length + (i > 0 ? 1 : 0);
+                for (let i = 0; i < tryTake; i++) {
+                    tryCutPos += words[i].length + (i > 0 ? 1 : 0);
+                }
                 if (!isCutInsideProtectedBoundary(chunk, tryCutPos)) {
                     cutPos = tryCutPos;
                     break;
                 }
             }
         }
+        
         const firstPart = chunk.substring(0, cutPos).trim();
         const secondPart = chunk.substring(cutPos).trim();
+        
         if (firstPart.length > 0 && secondPart.length > 0 && !isCutInsideProtectedBoundary(chunk, cutPos)) {
             return { success: true, parts: [firstPart, secondPart] };
         }
+        
         return { success: false, parts: [chunk] };
     }
 
@@ -853,37 +946,58 @@
         let newList = [];
         for (let chunk of chunks) {
             const result = cutBySmartFixed(chunk, maxSize, cutSize);
-            if (result.success) newList.push(...result.parts);
-            else newList.push(chunk);
+            if (result.success) {
+                newList.push(...result.parts);
+            } else {
+                newList.push(chunk);
+            }
         }
         return newList;
     }
 
+    // ==================== BƯỚC 6: KIỂM TRA ĐỘ DÀI (cắt thô, kiểm tra ranh giới) ====================
     function cutByForce(chunk, maxSize) {
         const words = chunk.split(' ');
-        if (words.length <= maxSize) return { success: false, parts: [chunk] };
+        const totalWords = words.length;
+        
+        if (totalWords <= maxSize) {
+            return { success: false, parts: [chunk] };
+        }
+        
         let cutPos = 0;
-        for (let i = 0; i < maxSize; i++) cutPos += words[i].length + (i > 0 ? 1 : 0);
+        for (let i = 0; i < maxSize; i++) {
+            cutPos += words[i].length + (i > 0 ? 1 : 0);
+        }
+        
+        // Kiểm tra không cắt bên trong ranh giới bảo vệ
         if (isCutInsideProtectedBoundary(chunk, cutPos)) {
+            // Thử cắt ở vị trí khác
             for (let trySize = maxSize - 1; trySize >= Math.floor(maxSize / 2); trySize--) {
                 let tryCutPos = 0;
-                for (let i = 0; i < trySize; i++) tryCutPos += words[i].length + (i > 0 ? 1 : 0);
+                for (let i = 0; i < trySize; i++) {
+                    tryCutPos += words[i].length + (i > 0 ? 1 : 0);
+                }
                 if (!isCutInsideProtectedBoundary(chunk, tryCutPos)) {
                     cutPos = tryCutPos;
                     break;
                 }
             }
         }
+        
         const firstPart = chunk.substring(0, cutPos).trim();
         const secondPart = chunk.substring(cutPos).trim();
+        
         if (firstPart.length > 0 && secondPart.length > 0 && !isCutInsideProtectedBoundary(chunk, cutPos)) {
             return { success: true, parts: [firstPart, secondPart] };
         }
+        
         return { success: false, parts: [chunk] };
     }
 
     function processStep6(chunks, maxSize) {
-        let newList = [], changed = false;
+        let newList = [];
+        let changed = false;
+        
         for (let chunk of chunks) {
             const result = cutByForce(chunk, maxSize);
             if (result.success) {
@@ -893,209 +1007,113 @@
                 newList.push(chunk);
             }
         }
-        return { chunks: newList, changed };
+        
+        return { chunks: newList, changed: changed };
     }
 
+    // ==================== 6 BƯỚC - 4 VÒNG LẶP CHÍNH ====================
     function processOneFullLoop(chunks, maxSize, cutSize) {
-        let r = processStep1WithLoop(chunks, 5);
-        r = processStep2WithLoop(r, 5);
-        r = processStep3WithLoop(r, 5);
-        r = processStep4WithLoop(r, maxSize, 5);
-        r = processStep5(r, maxSize, cutSize);
-        return processStep6(r, maxSize);
+        let result = processStep1WithLoop(chunks, 5);
+        result = processStep2WithLoop(result, 5);
+        result = processStep3WithLoop(result, 5);
+        result = processStep4WithLoop(result, maxSize, 5);
+        result = processStep5(result, maxSize, cutSize);
+        const step6Result = processStep6(result, maxSize);
+        
+        return step6Result;
     }
 
     function splitWithSixLoopsAndFourCycles(sentence, level) {
         const maxSize = getMaxChunkSize(level);
         const cutSize = getCutSizeForStep5(level);
+        
         let chunks = [sentence];
-        for (let cycle = 0; cycle < 4; cycle++) {
+        const maxCycles = 4;
+        
+        for (let cycle = 0; cycle < maxCycles; cycle++) {
             const result = processOneFullLoop(chunks, maxSize, cutSize);
-            let changed = result.chunks.length !== chunks.length;
+            
+            let changed = (result.chunks.length !== chunks.length);
             if (!changed) {
                 for (let i = 0; i < result.chunks.length; i++) {
-                    if (result.chunks[i] !== chunks[i]) { changed = true; break; }
+                    if (result.chunks[i] !== chunks[i]) {
+                        changed = true;
+                        break;
+                    }
                 }
             }
+            
             chunks = result.chunks;
-            if (!changed || !result.changed) break;
+            
+            if (!changed || !result.changed) {
+                break;
+            }
         }
+        
         return chunks.filter(c => c.trim().length > 0);
     }
 
-    // ==================== Tách câu ====================
+    // ==================== Tách câu từ đoạn văn ====================
     function splitIntoSentences(text) {
         if (!text.trim()) return [];
         let sentences = text.match(/[^.!?]+[.!?]+/g);
-        if (!sentences) return [text.trim()];
+        if (!sentences || sentences.length === 0) return [text.trim()];
         return sentences.map(s => s.trim()).filter(s => s.length > 0);
     }
 
     let currentSentences = [], currentChunks = [];
     
     function buildAllChunks(sentences, level) {
+        // Reset ranh giới bảo vệ khi xử lý văn bản mới
         resetProtectedBoundaries();
-        for (let phrase of FIXED_PHRASES) addProtectedBoundary(phrase);
+        // Thêm lại các ranh giới gốc
+        for (let phrase of FIXED_PHRASES) {
+            addProtectedBoundary(phrase);
+        }
+        
         const maxSize = getMaxChunkSize(level);
         const allChunks = [];
+        
         for (let i = 0; i < sentences.length; i++) {
             const sentence = sentences[i];
             const wordCount = sentence.split(' ').length;
             const shouldSplit = naturalPauseToggle.checked && wordCount > maxSize;
+            
             if (shouldSplit) {
                 const chunks = splitWithSixLoopsAndFourCycles(sentence, level);
-                for (let ch of chunks) allChunks.push({ text: ch, sentenceIdx: i, originalSentence: sentence });
+                for (let j = 0; j < chunks.length; j++) {
+                    allChunks.push({ text: chunks[j], sentenceIdx: i, originalSentence: sentence });
+                }
             } else {
                 allChunks.push({ text: sentence, sentenceIdx: i, originalSentence: sentence });
             }
         }
+        
         return allChunks;
     }
 
-    // ==================== HỆ THỐNG ÂM THANH (LẤY TỪ FILE MẪU) ====================
-    let audioQueue = [];
-    let audioTimeout = null;
-    let isAudioPaused = false;
+    // ==================== Audio Core ====================
+    let activePlayback = { cancelled: false };
+    let repeatCount = 2, delaySec = 1, repeatDelaySec = 0.3;
     let availableVoices = [];
-    let singleVoice = null;
 
-    function stopAllAudio() {
-        speechSynthesis.cancel();
-        if (audioTimeout) {
-            clearTimeout(audioTimeout);
-            audioTimeout = null;
-        }
-        audioQueue = [];
-        isAudioPaused = false;
-        if (activePlayback) activePlayback.cancelled = true;
-        activePlayback = { cancelled: false };
-    }
-
-    function pauseAudio() {
-        if (speechSynthesis.speaking) {
-            speechSynthesis.pause();
-            isAudioPaused = true;
-        }
-        if (audioTimeout) {
-            clearTimeout(audioTimeout);
-            audioTimeout = null;
-        }
-    }
-
-    function resumeAudio() {
-        if (isAudioPaused && speechSynthesis.paused) {
-            speechSynthesis.resume();
-            isAudioPaused = false;
-        }
-    }
-
-    // HÀM SẮP XẾP GIỌNG THEO NỀN TẢNG
-    function sortVoicesByPlatform(voices) {
-        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        if (isIOS) {
-            const samanthaIndex = voices.findIndex(v => v.name.toLowerCase().includes('samantha'));
-            if (samanthaIndex !== -1) {
-                const samantha = voices[samanthaIndex];
-                const otherVoices = voices.filter((_, idx) => idx !== samanthaIndex);
-                return [samantha, ...otherVoices];
-            }
-            return voices;
-        } else {
-            const googleVoices = voices.filter(v => v.name.toLowerCase().includes('google'));
-            const microsoftVoices = voices.filter(v => v.name.toLowerCase().includes('microsoft'));
-            const otherVoices = voices.filter(v => !v.name.toLowerCase().includes('google') && !v.name.toLowerCase().includes('microsoft'));
-            return [...googleVoices, ...microsoftVoices, ...otherVoices];
-        }
-    }
-
-    function populateVoiceList() {
-        if (!('speechSynthesis' in window)) return;
-        const voices = speechSynthesis.getVoices();
-        if (!voices.length) return;
-        
-        availableVoices = sortVoicesByPlatform(voices);
-        
-        const selected = voiceSelect.value;
-        voiceSelect.innerHTML = '';
-        
-        availableVoices.forEach(v => {
-            const opt = document.createElement('option');
-            opt.value = v.voiceURI;
-            opt.textContent = v.name + (v.lang ? ` (${v.lang})` : '');
-            voiceSelect.appendChild(opt);
-        });
-        
-        if (selected && availableVoices.some(v => v.voiceURI === selected)) {
-            voiceSelect.value = selected;
-        } else if (availableVoices.length > 0) {
-            const defaultVoice = availableVoices.find(v => v.lang === 'en-US') || availableVoices[0];
-            if (defaultVoice) voiceSelect.value = defaultVoice.voiceURI;
-        }
-        
-        singleVoice = voiceSelect.value ? availableVoices.find(v => v.voiceURI === voiceSelect.value) : null;
-    }
-
-    function getVoice() {
-        if (voiceSelect.value && availableVoices.length) {
-            return availableVoices.find(v => v.voiceURI === voiceSelect.value) || null;
-        }
-        return null;
-    }
-
+    function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+    
     function createUtterance(text) {
         if (!text) return null;
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        const voice = getVoice();
-        if (voice) utterance.voice = voice;
+        const selectedVoice = voiceSelect.value;
+        
+        // Nếu chọn "Mặc định" (value="default") thì KHÔNG set voice -> hệ thống tự chọn giọng mặc định
+        if (selectedVoice && selectedVoice !== 'default') {
+            const found = availableVoices.find(v => v.name === selectedVoice);
+            if (found) utterance.voice = found;
+        }
+        // Nếu selectedVoice === 'default' thì bỏ qua, để hệ thống tự chọn giọng mặc định
+        
         utterance.rate = 0.92;
         return utterance;
     }
-
-    function playAudioSentences(sentences, gapSec, repeat) {
-        stopAllAudio();
-        if (!sentences || sentences.length === 0) return;
-        
-        for (let item of sentences) {
-            for (let i = 0; i < repeat; i++) {
-                audioQueue.push({ text: item.text });
-            }
-        }
-        
-        let index = 0;
-        const playNext = () => {
-            if (index >= audioQueue.length) {
-                stopAllAudio();
-                return;
-            }
-            const item = audioQueue[index];
-            const utterance = createUtterance(item.text);
-            if (utterance) {
-                utterance.onend = () => {
-                    index++;
-                    if (index < audioQueue.length && !isAudioPaused) {
-                        audioTimeout = setTimeout(playNext, gapSec * 1000);
-                    } else if (index >= audioQueue.length) {
-                        stopAllAudio();
-                    }
-                };
-                utterance.onerror = () => {
-                    index++;
-                    if (index < audioQueue.length && !isAudioPaused) {
-                        audioTimeout = setTimeout(playNext, gapSec * 1000);
-                    }
-                };
-                speechSynthesis.speak(utterance);
-            } else {
-                index++;
-                playNext();
-            }
-        };
-        playNext();
-    }
-
-    let activePlayback = { cancelled: false };
-    let repeatCount = 2, delaySec = 1, repeatDelaySec = 0.3;
 
     async function playChunkSequence(chunks, repeat, delayMs, repeatDelayMs, cancelToken) {
         for (let i = 0; i < chunks.length; i++) {
@@ -1106,21 +1124,29 @@
                 if (utterance) {
                     await new Promise(res => { utterance.onend = res; utterance.onerror = res; speechSynthesis.cancel(); speechSynthesis.speak(utterance); });
                 }
-                if (r < repeat - 1 && !cancelToken.cancelled) await new Promise(r => setTimeout(r, repeatDelayMs));
+                if (r < repeat - 1 && !cancelToken.cancelled) await delay(repeatDelayMs);
             }
-            if (i < chunks.length - 1 && !cancelToken.cancelled) await new Promise(r => setTimeout(r, delayMs));
+            if (i < chunks.length - 1 && !cancelToken.cancelled) await delay(delayMs);
         }
     }
 
     async function startSequentialPlayback() {
         if (currentChunks.length === 0) { alert("Không có nội dung."); return; }
-        stopAllAudio();
+        stopAndReset();
         const token = { cancelled: false };
         activePlayback = token;
         const chunksTexts = currentChunks.map(c => c.text);
         await playChunkSequence(chunksTexts, repeatCount, delaySec * 1000, repeatDelaySec * 1000, token);
+        if (!token.cancelled) resetPlayState();
     }
-
+    
+    function stopAndReset() { 
+        activePlayback.cancelled = true; 
+        speechSynthesis.cancel(); 
+    }
+    
+    function resetPlayState() { activePlayback = { cancelled: false }; }
+    
     // ==================== DỊCH THUẬT ====================
     let translationDebounceTimer = null;
     let sentenceTranslations = [];
@@ -1128,8 +1154,9 @@
 
     async function translateTextToVietnamese(text) {
         if (!text.trim()) return "";
+        const encodedText = encodeURIComponent(text);
+        const url = `https://lingva.ml/api/v1/en/vi/${encodedText}`;
         try {
-            const url = `https://lingva.ml/api/v1/en/vi/${encodeURIComponent(text)}`;
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 8000);
             const response = await fetch(url, { signal: controller.signal });
@@ -1137,11 +1164,12 @@
             if (response.ok) {
                 const data = await response.json();
                 if (data && data.translation) {
-                    let translated = data.translation.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+                    let translated = data.translation;
+                    translated = translated.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
                     if (translated && translated !== text) return translated;
                 }
             }
-        } catch (e) {}
+        } catch (error) { console.log("Lingva API error", error); }
         try {
             const myMemoryUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|vi`)}`;
             const controller = new AbortController();
@@ -1151,9 +1179,12 @@
             if (response.ok) {
                 const data = await response.json();
                 let translated = data?.responseData?.translatedText || "";
-                if (translated && translated !== text) return translated.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+                if (translated && translated !== text) {
+                    translated = translated.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+                    return translated;
+                }
             }
-        } catch (e) {}
+        } catch (error) { console.log("Fallback API error", error); }
         return `[Tạm dịch] ${text}`;
     }
 
@@ -1162,7 +1193,7 @@
         const chunkTranslations = [];
         for (let i = 0; i < chunksTexts.length; i++) {
             chunkTranslations.push(await translateTextToVietnamese(chunksTexts[i]));
-            if (i < chunksTexts.length - 1) await new Promise(r => setTimeout(r, 100));
+            if (i < chunksTexts.length - 1) await delay(100);
         }
         sentenceTranslations[sentenceIdx] = { full: fullTranslation, chunks: chunkTranslations };
         updateTranslationDisplay();
@@ -1172,7 +1203,7 @@
         const text = textarea.value;
         if (!text.trim()) { sentenceTranslations = []; updateTranslationDisplay(); return; }
         const sentences = splitIntoSentences(text);
-        if (sentences.length === 0) return;
+        if (sentences.length === 0) { sentenceTranslations = []; updateTranslationDisplay(); return; }
         const chunksData = buildAllChunks(sentences, pauseLevelSelect.value);
         chunksBySentenceForTranslate = [];
         for (let i = 0; i < sentences.length; i++) {
@@ -1182,14 +1213,16 @@
         updateTranslationDisplay();
         for (let i = 0; i < sentences.length; i++) {
             translateSentenceAndChunks(i, sentences[i], chunksBySentenceForTranslate[i]);
-            if (i < sentences.length - 1) await new Promise(r => setTimeout(r, 200));
+            if (i < sentences.length - 1) await delay(200);
         }
     }
     
-    function scheduleTranslation() {
-        if (translationDebounceTimer) clearTimeout(translationDebounceTimer);
-        translationDebounceTimer = setTimeout(() => performTranslation(), 500);
+    function scheduleTranslation() { 
+        if (translationDebounceTimer) clearTimeout(translationDebounceTimer); 
+        translationDebounceTimer = setTimeout(() => performTranslation(), 500); 
     }
+    
+    function refreshTranslation() { performTranslation(); }
     
     function updateTranslationDisplay() {
         if (!translationContainer) return;
@@ -1200,15 +1233,18 @@
         let html = '';
         for (let i = 0; i < sentenceTranslations.length; i++) {
             const trans = sentenceTranslations[i];
-            if (!trans.full) {
+            const hasFull = trans.full !== null;
+            const chunks = trans.chunks || [];
+            const hasChunks = chunks.length > 1;
+            if (!hasFull) {
                 html += `<div class="translation-item"><div class="translation-main"><span class="translation-number">${i+1}</span><span class="translation-text"><i class="fas fa-spinner fa-pulse"></i> Đang dịch...</span></div></div>`;
                 continue;
             }
             html += `<div class="translation-item"><div class="translation-main"><span class="translation-number">${i+1}</span><span class="translation-text">${escapeHtml(trans.full)}</span></div>`;
-            if (trans.chunks && trans.chunks.length > 1) {
+            if (hasChunks && chunks.length > 0) {
                 html += `<div class="translation-chunk-list">`;
-                for (let j = 0; j < trans.chunks.length; j++) {
-                    html += `<div class="translation-chunk-badge">📝 ${j+1}. ${escapeHtml(trans.chunks[j])}</div>`;
+                for (let j = 0; j < chunks.length; j++) {
+                    html += `<div class="translation-chunk-badge">📝 ${j+1}. ${escapeHtml(chunks[j])}</div>`;
                 }
                 html += `</div>`;
             }
@@ -1245,13 +1281,7 @@
             const playBtn = document.createElement('button');
             playBtn.className = 'sentence-play';
             playBtn.innerHTML = '<i class="fas fa-play-circle"></i>';
-            playBtn.onclick = async (e) => {
-                e.stopPropagation();
-                stopAllAudio();
-                const token = { cancelled: false };
-                activePlayback = token;
-                await playChunkSequence([sentence], repeatCount, delaySec * 1000, repeatDelaySec * 1000, token);
-            };
+            playBtn.onclick = async () => { stopAndReset(); const token = { cancelled: false }; activePlayback = token; await playChunkSequence([sentence], repeatCount, delaySec*1000, repeatDelaySec*1000, token); };
             
             const textSpan = document.createElement('span');
             textSpan.className = 'sentence-text';
@@ -1269,13 +1299,7 @@
                 chunkListPlayBtn.innerHTML = '<i class="fas fa-head-side-headphones"></i> 🎧';
                 chunkListPlayBtn.title = 'Nghe toàn bộ câu (từng cụm rời)';
                 const chunksTexts = chunksOfThisSentence.map(c => c.text);
-                chunkListPlayBtn.onclick = async (e) => {
-                    e.stopPropagation();
-                    stopAllAudio();
-                    const token = { cancelled: false };
-                    activePlayback = token;
-                    await playChunkSequence(chunksTexts, repeatCount, delaySec * 1000, repeatDelaySec * 1000, token);
-                };
+                chunkListPlayBtn.onclick = async () => { stopAndReset(); const token = { cancelled: false }; activePlayback = token; await playChunkSequence(chunksTexts, repeatCount, delaySec*1000, repeatDelaySec*1000, token); };
                 mainDiv.appendChild(chunkListPlayBtn);
             }
             
@@ -1288,13 +1312,7 @@
                     const badge = document.createElement('span');
                     badge.className = 'chunk-badge';
                     badge.innerText = `${ci+1}. ${chunk.text}`;
-                    badge.onclick = async (e) => {
-                        e.stopPropagation();
-                        stopAllAudio();
-                        const token = { cancelled: false };
-                        activePlayback = token;
-                        await playChunkSequence([chunk.text], repeatCount, delaySec * 1000, repeatDelaySec * 1000, token);
-                    };
+                    badge.onclick = async () => { stopAndReset(); const token = { cancelled: false }; activePlayback = token; await playChunkSequence([chunk.text], repeatCount, delaySec*1000, repeatDelaySec*1000, token); };
                     chunkListDiv.appendChild(badge);
                 });
                 sentenceDiv.appendChild(chunkListDiv);
@@ -1306,7 +1324,7 @@
     
     function onTextChange() {
         updatePanelsFromText(textarea.value);
-        stopAllAudio();
+        stopAndReset();
         scheduleTranslation();
     }
     
@@ -1388,66 +1406,170 @@
         if (sent) sent.addEventListener('dblclick', onDoubleClickWord);
     }
     
-    // ==================== KHỞI TẠO VOICE (giống file mẫu) ====================
-    function initVoices() {
-        if (typeof speechSynthesis !== 'undefined') {
-            if (speechSynthesis.getVoices().length > 0) {
-                populateVoiceList();
-            }
-            speechSynthesis.onvoiceschanged = function() {
-                populateVoiceList();
-            };
+    // ==================== Voice list ====================
+    function populateVoiceList() {
+        const voices = speechSynthesis.getVoices();
+        if (!voices.length) return;
+        
+        availableVoices = voices;
+        const selected = voiceSelect.value;
+        
+        // Xóa tất cả option cũ, giữ lại option "Mặc định" đầu tiên
+        voiceSelect.innerHTML = '<option value="default" selected>📱 Mặc định (giọng hệ thống)</option>';
+        
+        // Thêm các giọng có sẵn
+        voices.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v.name;
+            opt.textContent = v.name + (v.lang ? ` (${v.lang})` : '');
+            voiceSelect.appendChild(opt);
+        });
+        
+        // Khôi phục lựa chọn trước đó (nếu có và không phải default)
+        if (selected && selected !== 'default' && voices.some(v => v.name === selected)) {
+            voiceSelect.value = selected;
+        } else {
+            voiceSelect.value = 'default';
         }
     }
     
-    // ==================== NỘI DUNG QUY TẮC ====================
+    // ==================== NỘI DUNG QUY TẮC CHUẨN ====================
     function getRuleContent(level) {
         const maxSize = getMaxChunkSize(level);
         const cutSize = getCutSizeForStep5(level);
+        
+        const fullPrepositionsList = PREPOSITIONS.join(', ');
+        const fixedPhrasesList = FIXED_PHRASES.join(', ');
+        const step3WordsList = STEP3_WORDS.join(', ');
+        
         return `
             <div><h4><i class="fas fa-gavel"></i> QUY TẮC CHUẨN: 6 BƯỚC - 4 VÒNG LẶP (v2.0) <span class="dynamic-badge">+ BẢO VỆ RANH GIỚI</span></h4></div>
+            
             <div class="step-box"><div class="step-title">📌 CÁC MỨC ĐỘ CẮT</div>
-            <table class="rule-table"><tr><th>Mức</th><th>Số từ tối đa</th><th>Cắt Bước 5</th></tr>
-            <tr><td>🌿 Nhẹ</td><td>12 từ</td><td>9 từ</td></tr>
-            <tr><td>⭐ Vừa</td><td>6 từ</td><td>5 từ</td></tr>
-            <tr><td>⚡ Mạnh</td><td>4 từ</td><td>3 từ</td></tr>
-            </table></div>
-            <div class="step-box"><div class="step-title">🛡️ HỆ THỐNG BẢO VỆ RANH GIỚI</div>
-            <div><strong>Cụm cố định gốc:</strong> Không bao giờ bị cắt bên trong.</div>
-            <div><strong>Ranh giới động:</strong> Khi chỉ có 1 từ đứng trước cụm cố định → tạo ranh giới mới.</div>
+            <table class="rule-table">
+                <tr><th>Mức</th><th>Ký hiệu</th><th>Số từ tối đa/cụm (maxSize)</th><th>Cắt Bước 5 (lấy số từ đầu)</th><th>Phù hợp</th></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">🌿</td><td><strong>Nhẹ</strong></td><td>12 từ</td><td>9 từ</td><td>Người mới bắt đầu, đọc hiểu</td></tr>
+                <tr><td style="background:#ff9800; color:white; text-align:center;">⭐</td><td><strong>Vừa</strong></td><td>6 từ</td><td>5 từ</td><td>Trình độ trung cấp, luyện nghe</td></tr>
+                <tr><td style="background:#f44336; color:white; text-align:center;">⚡</td><td><strong>Mạnh</strong></td><td>4 từ</td><td>3 từ</td><td>Luyện phát âm chi tiết</td></tr>
+            </table>
             </div>
-            <div class="step-box"><div class="step-title">🔄 6 BƯỚC XỬ LÝ</div>
-            <div>1. Dấu câu (,) (;) (:) - cắt SAU</div>
-            <div>2. Cụm cố định - tạo ranh giới bảo vệ</div>
-            <div>3. Từ nối - cắt trước hoặc gộp với phía sau</div>
-            <div>4. Giới từ - chỉ cắt khi > maxSize</div>
-            <div>5. Cắt thông minh - lấy ${cutSize} từ đầu</div>
-            <div>6. Kiểm tra độ dài - đảm bảo ≤ ${maxSize} từ</div>
+            
+            <div class="step-box"><div class="step-title">🛡️ HỆ THỐNG BẢO VỆ RANH GIỚI (KHÔNG CẮT BÊN TRONG)</div>
+            <div><strong>Loại 1 - CỤM CỐ ĐỊNH GỐC (KHÔNG BAO GIỜ THAY ĐỔI):</strong><br>
+            <code style="font-size:0.7rem; word-break:break-all;">${fixedPhrasesList}</code></div>
+            <div style="margin-top:10px;"><strong>Loại 2 - RANH GIỚI BẢO VỆ ĐỘNG (SINH RA TRONG BƯỚC 2):</strong><br>
+            Khi phát hiện <strong style="color:#c2410c;">chỉ có 1 từ duy nhất đứng trước một cụm cố định gốc</strong>, hệ thống sẽ:<br>
+            • Gộp thành ranh giới bảo vệ mới (ví dụ: "teenagers need to" từ "teenagers" + "need to")<br>
+            • <strong>KHÔNG cắt bên trong</strong> ranh giới này (không cắt giữa "teenagers" và "need to")<br>
+            • Nhưng VẪN CÓ THỂ cắt <strong>TRƯỚC</strong> hoặc <strong>SAU</strong> ranh giới bảo vệ
+            </div>
+            <div class="rule-example">Ví dụ: "To stay healthy, teenagers need to build habits" (mức Vừa - max 6 từ)<br>
+            → Ranh giới bảo vệ "teenagers need to" (3 từ, không bị cắt bên trong)<br>
+            → Kết quả: "To stay healthy," (3 từ) + "teenagers need to" (3 từ) + "build habits" (2 từ)
+            </div>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📋 DANH SÁCH TỪ NỐI (Bước 3)</div>
+            <code style="font-size:0.7rem; word-break:break-all;">${step3WordsList}</code>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📋 DANH SÁCH GIỚI TỪ (Bước 4)</div>
+            <code style="font-size:0.7rem; word-break:break-all;">${fullPrepositionsList}</code>
+            </div>
+            
+            <div class="step-box"><div class="step-title">🔄 6 BƯỚC XỬ LÝ TRONG VÒNG LẶP CHÍNH</div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">1</span> BƯỚC 1: DẤU CÂU</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>Cách cắt:</strong> Cắt <strong>SAU</strong> dấu phẩy (,), chấm phẩy (;), hai chấm (:)</div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Không cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">2</span> BƯỚC 2: CỤM CỐ ĐỊNH <span class="dynamic-badge">TẠO RANH GIỚI BẢO VỆ ĐỘNG</span></div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>Nguyên tắc 1:</strong> <span style="color:#c2410c;">TUYỆT ĐỐI KHÔNG</span> cắt bên trong cụm cố định gốc</div>
+            <div>• <strong>Nguyên tắc 2 (MỚI):</strong> Nếu <strong>chỉ có 1 từ</strong> đứng trước cụm cố định gốc → tạo ranh giới bảo vệ mới (1 từ + cụm gốc)</div>
+            <div>• <strong>Nguyên tắc 3:</strong> Ưu tiên cắt <strong>SAU</strong> toàn bộ cụm (kể cả cụm đã gộp)</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">3</span> BƯỚC 3: TỪ NỐI</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>CÓ dấu câu sau</strong> → <strong>TÁCH RIÊNG</strong> từ nối (kèm dấu)</div>
+            <div>• <strong>KHÔNG có dấu sau</strong> → <strong>GỘP</strong> từ nối với cụm phía sau</div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Không cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">4</span> BƯỚC 4: GIỚI TỪ</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>Điều kiện:</strong> CHỈ cắt khi số từ trong cụm <strong>> maxSize</strong></div>
+            <div>• <strong>Cách cắt:</strong> Cắt <strong>TRƯỚC</strong> giới từ</div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Không cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">5</span> BƯỚC 5: CẮT THÔNG MINH</div>
+            <div>• <strong>Điều kiện:</strong> CHỈ cắt khi số từ trong cụm <strong>> maxSize</strong></div>
+            <div>• <strong>Cách cắt:</strong> Cắt lấy <strong>${cutSize} từ đầu</strong></div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Tự động điều chỉnh vị trí cắt để tránh cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">6</span> BƯỚC 6: KIỂM TRA ĐỘ DÀI</div>
+            <div>• Đảm bảo <strong>không có cụm nào > maxSize</strong></div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Tự động điều chỉnh vị trí cắt để tránh cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            </div>
+            
+            <div class="principle-box"><div class="step-title">✅ 7 NGUYÊN TẮC VÀNG</div>
+            <table class="rule-table">
+                <tr><th>STT</th><th>Nguyên tắc</th><th>Mô tả</th></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">1</td><td><strong>Không gộp lại</strong></td><td>Đã cắt thì giữ nguyên</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">2</td><td><strong>Chỉ cắt khi cần</strong></td><td>Bước 4,5,6 chỉ cắt khi số từ > maxSize</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">3</td><td><strong>Ranh giới bất khả xâm phạm</strong></td><td>Không cắt bên trong ranh giới bảo vệ</td></tr>
+                <tr><td style="background:#c2410c; color:white; text-align:center;">4</td><td><strong>1 từ + cụm gốc → tạo ranh giới mới</strong></td><td>Gộp và thêm vào danh sách bảo vệ</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">5</td><td><strong>Giới từ gộp với phía sau</strong></td><td>Khi cắt tại giới từ → giới từ thuộc phần phía sau</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">6</td><td><strong>Từ nối không dấu → gộp</strong></td><td>Gộp từ nối với cụm phía sau</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">7</td><td><strong>Vòng lặp con xử lý triệt để</strong></td><td>Bước 1-4 có vòng lặp con 5 lần</td></tr>
+            </table>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📊 VÍ DỤ MINH HỌA (Mức Vừa - max 6 từ)</div>
+            <div><strong>Câu:</strong> "To stay healthy, teenagers need to build good daily habits."</div>
+            <div><strong>Kết quả sau xử lý:</strong></div>
+            <div>1. To stay healthy,</div>
+            <div>2. teenagers need to</div>
+            <div>3. build good daily habits.</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📌 GHI CHÚ QUAN TRỌNG</div>
+            <div>• Ranh giới bảo vệ động <strong>KHÔNG chặn cắt</strong> ở đầu hoặc cuối cụm</div>
+            <div>• Mục tiêu: Đảm bảo mỗi cụm ≤ maxSize nhưng vẫn giữ nguyên các cặp từ quan trọng</div>
             </div>
         `;
     }
     
     function updateRulePanel() { rulePanel.innerHTML = getRuleContent(pauseLevelSelect.value); }
     
-    // ==================== KHỞI TẠO SỰ KIỆN ====================
+    // ==================== Khởi tạo sự kiện ====================
     pauseLevelSelect.addEventListener('change', () => { updateRulePanel(); if (currentSentences.length) refreshChunks(); });
-    ruleToggleBtn.addEventListener('click', () => {
-        rulePanel.classList.toggle('show');
-        ruleToggleBtn.innerHTML = rulePanel.classList.contains('show') ? '<i class="fas fa-eye-slash"></i> Ẩn quy tắc' : '<i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0 + Bảo vệ ranh giới)';
-        if (rulePanel.classList.contains('show')) updateRulePanel();
+    ruleToggleBtn.addEventListener('click', () => { 
+        rulePanel.classList.toggle('show'); 
+        ruleToggleBtn.innerHTML = rulePanel.classList.contains('show') ? '<i class="fas fa-eye-slash"></i> Ẩn quy tắc' : '<i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0 + Bảo vệ ranh giới)'; 
+        if (rulePanel.classList.contains('show')) updateRulePanel(); 
     });
     textarea.addEventListener('input', onTextChange);
     playSequentialBtn.addEventListener('click', startSequentialPlayback);
-    pauseBtn.addEventListener('click', () => { if (activePlayback) activePlayback.cancelled = true; speechSynthesis.cancel(); });
-    stopBtn.addEventListener('click', stopAllAudio);
-    refreshTranslationBtn.addEventListener('click', performTranslation);
-    naturalPauseToggle.addEventListener('change', () => { refreshChunks(); stopAllAudio(); scheduleTranslation(); });
+    pauseBtn.addEventListener('click', () => { activePlayback.cancelled = true; speechSynthesis.cancel(); });
+    stopBtn.addEventListener('click', stopAndReset);
+    refreshTranslationBtn.addEventListener('click', refreshTranslation);
+    naturalPauseToggle.addEventListener('change', () => { refreshChunks(); stopAndReset(); scheduleTranslation(); });
     repeatSelect.addEventListener('change', () => { repeatCount = parseInt(repeatSelect.value); });
     delaySelect.addEventListener('change', () => { delaySec = parseFloat(delaySelect.value); });
     repeatDelaySelect.addEventListener('change', () => { repeatDelaySec = parseFloat(repeatDelaySelect.value); });
-    voiceSelect.addEventListener('change', () => { singleVoice = voiceSelect.value ? availableVoices.find(v => v.voiceURI === voiceSelect.value) : null; });
     
-    initVoices();
+    if (typeof speechSynthesis !== 'undefined') {
+        speechSynthesis.onvoiceschanged = populateVoiceList;
+        populateVoiceList();
+    }
+    
     textarea.value = SAMPLE_TEXT;
     onTextChange();
     repeatCount = parseInt(repeatSelect.value);
