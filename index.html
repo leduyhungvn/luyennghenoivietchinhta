@@ -2,18 +2,19 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>English Audio Tool - 6 Bước 4 Vòng Lặp (Quy trình chuẩn v2.0) | Bảo vệ động + Cắt đúng</title>
     <style>
         * {
             box-sizing: border-box;
             font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         body {
             background: linear-gradient(145deg, #f6f9fc 0%, #eef2f5 100%);
             margin: 0;
             min-height: 100vh;
-            padding: 1rem 1rem;
+            padding: 1rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,7 +26,7 @@
             backdrop-filter: blur(2px);
             border-radius: 2rem;
             box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25);
-            padding: 1.2rem 1.2rem;
+            padding: 1.2rem;
         }
         h1 {
             font-size: 1.4rem;
@@ -67,25 +68,26 @@
         .small-btn {
             background: #eef2ff;
             border: none;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 30px;
             font-size: 0.75rem;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            transition: 0.2s;
+            transition: 0.1s;
+            touch-action: manipulation;
         }
-        .small-btn:active { transform: scale(0.96); }
+        .small-btn:active { transform: scale(0.96); background: #d9e6f7; }
         .small-btn.clear-btn { background: #fee2e2; color: #c2410c; }
         .small-btn.sample-btn { background: #e6f7e6; color: #2d6a2d; }
         textarea {
             width: 100%;
             border-radius: 1.2rem;
             border: 1px solid #cbdbe0;
-            padding: 1rem 1.2rem;
+            padding: 1rem;
             font-size: 1rem;
-            line-height: 1.5;
+            line-height: 1.4;
             font-family: monospace;
             resize: vertical;
         }
@@ -124,12 +126,14 @@
             justify-content: space-between;
         }
         .card h3 .card-icon-action {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             background: #eef2ff;
-            padding: 6px 10px;
+            padding: 5px 10px;
             border-radius: 40px;
+            touch-action: manipulation;
         }
+        .card h3 .card-icon-action:active { background: #d9e6f7; transform: scale(0.96); }
         .audio-row {
             display: flex;
             flex-wrap: wrap;
@@ -137,22 +141,22 @@
             gap: 10px;
             margin-bottom: 12px;
             background: #f8fafc;
-            padding: 12px 14px;
+            padding: 10px 14px;
             border-radius: 60px;
         }
         .audio-btn {
             background: #f1f5f9;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            width: 48px;
-            height: 48px;
+            width: 50px;
+            height: 50px;
             border-radius: 60px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: #1e293b;
-            transition: 0.2s;
+            transition: 0.1s;
             touch-action: manipulation;
         }
         .audio-btn:active { background: #cbd5e1; transform: scale(0.95); }
@@ -184,7 +188,7 @@
             align-items: center;
             gap: 16px;
         }
-        .natural-reading-row label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 500; }
+        .natural-reading-row label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 500; touch-action: manipulation; }
         .natural-reading-row input { width: 18px; height: 18px; cursor: pointer; }
         .pause-level-select { padding: 6px 12px; border-radius: 30px; border: 1px solid #b8d9b0; background: white; cursor: pointer; }
         .copy-text {
@@ -231,7 +235,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            transition: 0.1s;
             touch-action: manipulation;
         }
         .sentence-play:active { background: #c7d2fe; transform: scale(0.94); }
@@ -250,7 +254,7 @@
             color: #1e3a5f;
             touch-action: manipulation;
         }
-        .chunk-list-play-btn:active { background: #c7d2fe; }
+        .chunk-list-play-btn:active { background: #c7d2fe; transform: scale(0.94); }
         .chunk-list {
             display: flex;
             flex-wrap: wrap;
@@ -270,7 +274,7 @@
             transition: 0.1s;
             touch-action: manipulation;
         }
-        .chunk-badge:active { background: #cbdff5; }
+        .chunk-badge:active { background: #cbdff5; transform: scale(0.96); }
         .dict-popup {
             position: fixed;
             z-index: 10000;
@@ -287,7 +291,7 @@
         .dict-popup .dict-phonetic { color: #4b6e8a; font-family: monospace; margin: 5px 0; }
         .dict-popup .dict-meaning { margin: 10px 0; color: #1e2a3e; }
         .dict-popup .dict-example { font-style: italic; background: #f1f5f9; padding: 6px; border-radius: 12px; margin: 8px 0; font-size: 0.85rem; }
-        .dict-popup .close-dict { background: #eef2ff; border: none; border-radius: 30px; padding: 4px 10px; cursor: pointer; font-size: 0.7rem; float: right; }
+        .dict-popup .close-dict { background: #eef2ff; border: none; border-radius: 30px; padding: 4px 10px; cursor: pointer; font-size: 0.7rem; float: right; touch-action: manipulation; }
         .dict-error { color: #c2410c; text-align: center; }
         footer { font-size: 0.7rem; text-align: center; margin-top: 1.2rem; color: #5b6e8c; }
         .translation-loading { color: #3b82f6; font-style: italic; }
@@ -306,7 +310,9 @@
             margin-top: 1rem;
             width: 100%;
             justify-content: center;
+            touch-action: manipulation;
         }
+        .rule-toggle-btn:active { background: #d9e6f7; transform: scale(0.98); }
         .rule-panel {
             background: #fefce8;
             border: 1px solid #e5e0b0;
@@ -400,8 +406,13 @@
             font-size: 0.65rem;
             margin-left: 8px;
         }
-        button { background: none; border: none; }
-        [onclick], button, .chunk-badge, .sentence-play, .audio-btn, .chunk-list-play-btn { cursor: pointer; touch-action: manipulation; }
+        .protected-boundary {
+            border-bottom: 2px dotted #c2410c;
+        }
+        button, .audio-btn, .sentence-play, .chunk-badge, .chunk-list-play-btn, .rule-toggle-btn, .card-icon-action, .small-btn, .close-dict {
+            cursor: pointer;
+            touch-action: manipulation;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -413,7 +424,7 @@
             <span class="textarea-label">📝 Dán đoạn văn tiếng Anh vào đây:</span>
             <div class="textarea-buttons">
                 <button id="clearTextBtn" class="small-btn clear-btn"><i class="fas fa-trash-alt"></i> Xóa</button>
-                <button id="sampleTextBtn" class="small-btn sample-btn"><i class="fas fa-file-alt"></i> Mẫu</button>
+                <button id="sampleTextBtn" class="-small-btn sample-btn"><i class="fas fa-file-alt"></i> Mẫu</button>
             </div>
         </div>
         <textarea id="inputText" rows="6">Hello there! Welcome to the English audio tool. You can paste any paragraph. I try to minimize activities that waste excessive time like reducing time spent on social media or other distractions during study periods. I usually create a daily, weekly or monthly schedule that includes dedicated time for studying, and other activities. The system will split long sentences into small chunks, then repeat each chunk several times. Practice pronunciation easily, because this tool now supports natural pauses just like a real person. Enjoy!</textarea>
@@ -422,42 +433,69 @@
     <div class="cards-grid">
         <div class="card">
             <h3><i class="fas fa-sliders-h"></i> 1. Điều khiển phát</h3>
-            <div class="audio-row">
+            <div class="audio-row" style="flex-wrap: wrap; gap: 10px;">
                 <button id="playSequentialBtn" class="audio-btn"><i class="fas fa-volume-up"></i></button>
                 <button id="pauseBtn" class="audio-btn"><i class="fas fa-pause"></i></button>
                 <button id="stopBtn" class="audio-btn"><i class="fas fa-stop"></i></button>
                 <div style="display: flex; gap: 6px; align-items: center;">
                     <label style="font-size:0.75rem;">⏱️ Delay:</label>
-                    <select id="delaySelect" class="select-small" style="width: 70px;"><option value="0.5">0.5s</option><option value="0.75">0.75s</option><option value="1">1s</option><option value="2" selected>2s</option><option value="3">3s</option><option value="4">4s</option></select>
+                    <select id="delaySelect" class="select-small" style="width: 70px;">
+                        <option value="0.5">0.5s</option><option value="0.75">0.75s</option>
+                        <option value="1">1s</option><option value="2" selected>2s</option>
+                        <option value="3">3s</option><option value="4">4s</option>
+                    </select>
                 </div>
                 <div style="display: flex; gap: 6px; align-items: center;">
                     <label style="font-size:0.75rem;">🔁 Lặp mỗi cụm:</label>
-                    <select id="repeatSelect" class="select-small" style="width: 70px;"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select>
+                    <select id="repeatSelect" class="select-small" style="width: 70px;">
+                        <option value="1">1</option><option value="2" selected>2</option>
+                        <option value="3">3</option><option value="4">4</option>
+                    </select>
                 </div>
                 <div style="display: flex; gap: 6px; align-items: center;">
                     <label style="font-size:0.75rem;">🔄 Nghỉ giữa các lần lặp:</label>
-                    <select id="repeatDelaySelect" class="select-small" style="width: 75px;"><option value="0.1">0.1s</option><option value="0.3" selected>0.3s</option><option value="0.5">0.5s</option><option value="0.7">0.7s</option><option value="1">1s</option><option value="2">2s</option><option value="3">3s</option></select>
+                    <select id="repeatDelaySelect" class="select-small" style="width: 75px;">
+                        <option value="0.1">0.1s</option><option value="0.3" selected>0.3s</option>
+                        <option value="0.5">0.5s</option><option value="0.7">0.7s</option>
+                        <option value="1">1s</option><option value="2">2s</option>
+                        <option value="3">3s</option>
+                    </select>
                 </div>
             </div>
             <div class="natural-reading-row">
                 <label><input type="checkbox" id="naturalPauseToggle" checked> 🗣️ <strong>Đọc tự nhiên</strong><span class="info-badge">6 bước - 4 vòng lặp chuẩn</span></label>
-                <select id="pauseLevel" class="pause-level-select"><option value="light">🌿 Nhẹ (max 12 từ)</option><option value="moderate" selected>⭐ Vừa (max 6 từ)</option><option value="strong">⚡ Mạnh (max 4 từ)</option></select>
+                <select id="pauseLevel" class="pause-level-select">
+                    <option value="light">🌿 Nhẹ (max 12 từ)</option>
+                    <option value="moderate" selected>⭐ Vừa (max 6 từ)</option>
+                    <option value="strong">⚡ Mạnh (max 4 từ)</option>
+                </select>
             </div>
             <div class="voice-row">
                 <label><i class="fas fa-microphone-alt"></i> Giọng đọc:</label>
                 <select id="voiceSelect" class="select-small"></select>
             </div>
         </div>
-        <div class="card"><h3><i class="fas fa-file-alt"></i> 2. Đoạn văn gốc</h3><div id="originalTextDisplay" class="copy-text"></div></div>
-        <div class="card"><h3><i class="fas fa-list-ol"></i> 3. Các câu & cụm</h3><div id="sentencesList" class="sentences-list"><div style="color:gray; text-align:center;">Chưa có dữ liệu</div></div></div>
-        <div class="card"><h3><span><i class="fas fa-language"></i> 4. Dịch tiếng Việt</span><span id="refreshTranslationBtn" class="card-icon-action"><i class="fas fa-sync-alt"></i> Dịch lại</span></h3><div id="translationResult" class="sentences-list"><div style="color:gray; text-align:center;">⏳ Đang tải...</div></div></div>
+        <div class="card">
+            <h3><i class="fas fa-file-alt"></i> 2. Đoạn văn gốc</h3>
+            <div id="originalTextDisplay" class="copy-text"></div>
+        </div>
+        <div class="card">
+            <h3><i class="fas fa-list-ol"></i> 3. Các câu & cụm</h3>
+            <div id="sentencesList" class="sentences-list"><div style="color:gray; text-align:center;">Chưa có dữ liệu</div></div>
+        </div>
+        <div class="card">
+            <h3><span><i class="fas fa-language"></i> 4. Dịch tiếng Việt</span><span id="refreshTranslationBtn" class="card-icon-action"><i class="fas fa-sync-alt"></i> Dịch lại</span></h3>
+            <div id="translationResult" class="sentences-list"><div style="color:gray; text-align:center;">⏳ Đang tải...</div></div>
+        </div>
     </div>
-    <div style="text-align: center;"><button id="ruleToggleBtn" class="rule-toggle-btn"><i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0 + Bảo vệ động)</button></div>
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <button id="ruleToggleBtn" class="rule-toggle-btn"><i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0 + Bảo vệ động)</button>
+    </div>
     <div id="rulePanel" class="rule-panel"></div>
-    <footer>⚡ Web Speech API | Dịch Anh→Việt | Double-click tra từ | 6 BƯỚC - 4 VÒNG LẶP CHUẨN v2.0 | Bảo vệ cụm cố định | Bảo vệ động (1 từ + cụm gốc)</footer>
+    <footer>⚡ Web Speech API | Dịch Anh→Việt | Double-click tra từ | 6 BƯỚC - 4 VÒNG LẶP CHUẨN v2.0 | Bảo vệ cụm cố định | Bảo vệ động (1 từ + cụm gốc) - KHÔNG chặn cắt đầu/cuối cụm</footer>
 </div>
 <script>
-    // DOM elements
+    // ==================== DOM Elements ====================
     const textarea = document.getElementById('inputText');
     const originalDisplay = document.getElementById('originalTextDisplay');
     const sentencesContainer = document.getElementById('sentencesList');
@@ -476,98 +514,1051 @@
     const rulePanel = document.getElementById('rulePanel');
     const clearTextBtn = document.getElementById('clearTextBtn');
     const sampleTextBtn = document.getElementById('sampleTextBtn');
-    
+
+    // ==================== Sample Text ====================
     const SAMPLE_TEXT = `Hello there! Welcome to the English audio tool. You can paste any paragraph. I try to minimize activities that waste excessive time like reducing time spent on social media or other distractions during study periods. I usually create a daily, weekly or monthly schedule that includes dedicated time for studying, and other activities. The system will split long sentences into small chunks, then repeat each chunk several times. Practice pronunciation easily, because this tool now supports natural pauses just like a real person. Enjoy!`;
+
     clearTextBtn.onclick = () => { textarea.value = ''; onTextChange(); textarea.focus(); };
     sampleTextBtn.onclick = () => { textarea.value = SAMPLE_TEXT; onTextChange(); textarea.focus(); };
-    
+
+    // ==================== DANH SÁCH BẢO VỆ ĐỘNG (lưu các ranh giới không được cắt) ====================
     let protectedBoundaries = [];
-    function addProtectedBoundary(phrase) { if (!protectedBoundaries.includes(phrase.toLowerCase())) protectedBoundaries.push(phrase.toLowerCase()); }
-    function resetProtectedBoundaries() { protectedBoundaries = []; }
+
+    function addProtectedBoundary(phrase) {
+        if (!protectedBoundaries.includes(phrase.toLowerCase())) {
+            protectedBoundaries.push(phrase.toLowerCase());
+        }
+    }
+
+    function resetProtectedBoundaries() {
+        protectedBoundaries = [];
+    }
+
     function isCutInsideProtectedBoundary(text, cutPos) {
         if (!text || cutPos <= 0 || cutPos >= text.length) return false;
         const lowerText = text.toLowerCase();
         for (let boundary of protectedBoundaries) {
             const idx = lowerText.indexOf(boundary);
-            if (idx !== -1) { if (cutPos > idx && cutPos < idx + boundary.length) return true; }
+            if (idx !== -1) {
+                const boundaryStart = idx;
+                const boundaryEnd = idx + boundary.length;
+                if (cutPos > boundaryStart && cutPos < boundaryEnd) {
+                    return true;
+                }
+            }
         }
         return false;
     }
+
+    // ==================== CẤU HÌNH MỨC ĐỘ ====================
+    function getMaxChunkSize(level) {
+        if (level === 'light') return 12;
+        if (level === 'moderate') return 6;
+        return 4;
+    }
+
+    function getCutSizeForStep5(level) {
+        if (level === 'light') return 9;
+        if (level === 'moderate') return 5;
+        return 3;
+    }
+
+    // ==================== DANH SÁCH CỤM CỐ ĐỊNH GỐC ====================
+    const FIXED_PHRASES = [
+        'as well as', 'as far as', 'in spite of', 'in front of', 'in addition to',
+        'in case of', 'in lieu of', 'in light of', 'in place of', 'in terms of',
+        'in view of', 'on account of', 'on behalf of', 'on top of', 'with regard to',
+        'with respect to', 'as long as', 'as soon as', 'even if', 'even though',
+        'provided that', 'so that', 'the most of', 'welcome to', 'just like', 'such as',
+        'because of', 'instead of', 'due to', 'prior to', 'together with', 'along with',
+        'apart from', 'according to', 'ahead of', 'aside from', 'contrary to',
+        'except for', 'inside of', 'outside of', 'owing to', 'regardless of',
+        'subsequent to', 'thanks to', 'a lot of', 'lots of', 'kind of', 'type of', 'sort of',
+        'look like', 'feel like', 'sound like', 'taste like', 'seem like',
+        'want to', 'need to', 'have to', 'used to', 'going to', 'ought to', 'supposed to', 'able to', 'wants to', 'needs to', 'has to', 'wanted to', 'needed to', 'had to', 'looks like', 'feels like', 'sounds like', 'tastes like', 'seems like', 'such that', 'proud of', 'excepted for', 'excepts for', 'more than'
+    ];
+    FIXED_PHRASES.sort((a, b) => b.split(' ').length - a.split(' ').length);
+
+    for (let phrase of FIXED_PHRASES) {
+        addProtectedBoundary(phrase);
+    }
+
+    // ==================== TỪ NỐI ====================
+    const STEP3_WORDS = [
+        'which', 'who', 'that', 'when', 'where', 'whom', 'what', 'how',
+        'and', 'or', 'but', 'so', 'for', 'nor', 'yet',
+        'because', 'since', 'although', 'though', 'whereas', 'while',
+        'if', 'unless', 'whenever', 'as', 'once', 'until', 'till',
+        'even though', 'then', 'however', 'therefore', 'consequently',
+        'furthermore', 'moreover', 'nevertheless', 'accordingly', 'hence', 'thus'
+    ];
+
+    // ==================== GIỚI TỪ ====================
+    const PREPOSITIONS = [
+        'aboard', 'about', 'above', 'absent', 'across', 'after', 'against',
+        'along', 'alongside', 'amid', 'amidst', 'among', 'amongst', 'anti',
+        'around', 'as', 'astride', 'at', 'atop', 'bar', 'barring', 'before',
+        'behind', 'below', 'beneath', 'beside', 'besides', 'between', 'beyond',
+        'by', 'circa', 'concerning', 'considering', 'despite', 'down',
+        'during', 'except', 'excepting', 'excluding', 'far', 'following', 'for',
+        'from', 'given', 'in', 'including', 'inside', 'into', 'less', 'like',
+        'low', 'minus', 'near', 'nearer', 'nearest', 'notwithstanding', 'of',
+        'on', 'onto', 'opposite', 'out', 'outside', 'over', 'past', 'per',
+        'plus', 'regarding', 'respecting', 'round', 'save', 'saving',
+        'since', 'than', 'through', 'throughout', 'till', 'toward', 'towards',
+        'under', 'underneath', 'unlike', 'until', 'up', 'to', 'upon', 'versus',
+        'via', 'with', 'within', 'without', 'each', 'every'
+    ];
+
+    // ==================== BƯỚC 1: DẤU CÂU ====================
+    function cutByPunctuation(text) {
+        const punctChars = [',', ';', ':'];
+        for (let i = 0; i < text.length; i++) {
+            if (punctChars.includes(text[i])) {
+                const cutPos = i + 1;
+                if (isCutInsideProtectedBoundary(text, cutPos)) {
+                    continue;
+                }
+                const firstPart = text.substring(0, cutPos).trim();
+                const secondPart = text.substring(cutPos).trim();
+                if (firstPart.length > 0 && secondPart.length > 0) {
+                    return { success: true, parts: [firstPart, secondPart] };
+                }
+            }
+        }
+        return { success: false, parts: [text] };
+    }
+
+    function processStep1WithLoop(chunks, maxSubLoops = 5) {
+        let currentList = [...chunks];
+        let changed = true;
+        let loopCount = 0;
+        while (changed && loopCount < maxSubLoops) {
+            changed = false;
+            let newList = [];
+            for (let chunk of currentList) {
+                const result = cutByPunctuation(chunk);
+                if (result.success) {
+                    newList.push(...result.parts);
+                    changed = true;
+                } else {
+                    newList.push(chunk);
+                }
+            }
+            currentList = newList;
+            loopCount++;
+            if (!changed) break;
+        }
+        return currentList;
+    }
+
+    // ==================== BƯỚC 2: CỤM CỐ ĐỊNH ====================
+    function protectFixedPhrases(text) {
+        let result = [text];
+        let changed = true;
+        let maxPasses = 10;
+        while (changed && maxPasses-- > 0) {
+            changed = false;
+            let newParts = [];
+            for (let part of result) {
+                let found = false;
+                const lowerPart = part.toLowerCase();
+                for (let phrase of FIXED_PHRASES) {
+                    const phraseIndex = lowerPart.indexOf(phrase);
+                    if (phraseIndex !== -1) {
+                        const beforeText = part.substring(0, phraseIndex).trim();
+                        const beforeWords = beforeText.length > 0 ? beforeText.split(/\s+/).length : 0;
+                        if (beforeWords === 1 && phraseIndex > 0) {
+                            const lastSpaceBefore = part.lastIndexOf(' ', phraseIndex - 1);
+                            const startPos = (lastSpaceBefore === -1) ? 0 : lastSpaceBefore + 1;
+                            const oneWord = part.substring(startPos, phraseIndex).trim();
+                            const combinedPhrase = oneWord + ' ' + phrase;
+                            addProtectedBoundary(combinedPhrase);
+                            const combinedLength = combinedPhrase.length;
+                            const cutPosAfterCombined = startPos + combinedLength;
+                            if (cutPosAfterCombined < part.length) {
+                                const before = part.substring(0, cutPosAfterCombined).trim();
+                                const after = part.substring(cutPosAfterCombined).trim();
+                                if (before.length > 0 && after.length > 0) {
+                                    newParts.push(before);
+                                    newParts.push(after);
+                                    found = true;
+                                    changed = true;
+                                    break;
+                                }
+                            } else {
+                                newParts.push(part);
+                                found = true;
+                                changed = false;
+                                break;
+                            }
+                        }
+                        const cutPosAfter = phraseIndex + phrase.length;
+                        if (cutPosAfter < part.length) {
+                            if (!isCutInsideProtectedBoundary(part, cutPosAfter)) {
+                                const before = part.substring(0, cutPosAfter).trim();
+                                const after = part.substring(cutPosAfter).trim();
+                                if (before.length > 0 && after.length > 0) {
+                                    newParts.push(before);
+                                    newParts.push(after);
+                                    found = true;
+                                    changed = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (beforeWords > 1 && phraseIndex > 0) {
+                            if (!isCutInsideProtectedBoundary(part, phraseIndex)) {
+                                const before = part.substring(0, phraseIndex).trim();
+                                const after = part.substring(phraseIndex).trim();
+                                if (before.length > 0 && after.length > 0) {
+                                    newParts.push(before);
+                                    newParts.push(after);
+                                    found = true;
+                                    changed = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!found) {
+                    newParts.push(part);
+                }
+            }
+            result = newParts;
+            if (!changed) break;
+        }
+        return result.filter(p => p.length > 0);
+    }
+
+    function processStep2WithLoop(chunks, maxSubLoops = 5) {
+        let currentList = [...chunks];
+        let changed = true;
+        let loopCount = 0;
+        while (changed && loopCount < maxSubLoops) {
+            changed = false;
+            let newList = [];
+            for (let chunk of currentList) {
+                const result = protectFixedPhrases(chunk);
+                if (result.length !== 1 || result[0] !== chunk) {
+                    newList.push(...result);
+                    changed = true;
+                } else {
+                    newList.push(chunk);
+                }
+            }
+            currentList = newList;
+            loopCount++;
+            if (!changed) break;
+        }
+        return currentList;
+    }
+
+    // ==================== BƯỚC 3: TỪ NỐI ====================
+    function cutByConnector(text) {
+        for (let conn of STEP3_WORDS) {
+            const regex = new RegExp(`^(.*?)\\s+(${conn})([,.;:!?]?)\\s+(.*)$`, 'i');
+            const match = text.match(regex);
+            if (match && match[1].trim().length > 0) {
+                const beforeConn = match[1].trim();
+                const connector = match[2];
+                const punctuationAfter = match[3];
+                const afterConn = match[4].trim();
+                const cutPos = beforeConn.length + 1;
+                if (isCutInsideProtectedBoundary(text, cutPos)) {
+                    continue;
+                }
+                let parts = [];
+                if (punctuationAfter === ',' || punctuationAfter === '.' || 
+                    punctuationAfter === ';' || punctuationAfter === ':' || 
+                    punctuationAfter === '!' || punctuationAfter === '?') {
+                    parts = [beforeConn, connector + punctuationAfter, afterConn];
+                } else {
+                    parts = [beforeConn, connector + ' ' + afterConn];
+                }
+                if (parts.every(p => p.length > 0)) {
+                    return { success: true, parts: parts };
+                }
+            }
+        }
+        return { success: false, parts: [text] };
+    }
+
+    function processStep3WithLoop(chunks, maxSubLoops = 5) {
+        let currentList = [...chunks];
+        let changed = true;
+        let loopCount = 0;
+        while (changed && loopCount < maxSubLoops) {
+            changed = false;
+            let newList = [];
+            for (let chunk of currentList) {
+                const result = cutByConnector(chunk);
+                if (result.success) {
+                    newList.push(...result.parts);
+                    changed = true;
+                } else {
+                    newList.push(chunk);
+                }
+            }
+            currentList = newList;
+            loopCount++;
+            if (!changed) break;
+        }
+        return currentList;
+    }
+
+    // ==================== BƯỚC 4: GIỚI TỪ ====================
+    function cutByPreposition(text, maxSize) {
+        const words = text.split(' ');
+        const totalWords = words.length;
+        if (totalWords <= maxSize) {
+            return { success: false, parts: [text] };
+        }
+        for (let i = 0; i < words.length; i++) {
+            let lowerWord = words[i].toLowerCase().replace(/[,.;:!?]$/, '');
+            if (PREPOSITIONS.includes(lowerWord)) {
+                let cutPos = 0;
+                for (let j = 0; j < i; j++) {
+                    cutPos += words[j].length + (j > 0 ? 1 : 0);
+                }
+                if (isCutInsideProtectedBoundary(text, cutPos)) {
+                    continue;
+                }
+                const firstPart = text.substring(0, cutPos).trim();
+                const secondPart = text.substring(cutPos).trim();
+                if (firstPart.length > 0 && secondPart.length > 0) {
+                    return { success: true, parts: [firstPart, secondPart] };
+                }
+            }
+        }
+        return { success: false, parts: [text] };
+    }
+
+    function processStep4WithLoop(chunks, maxSize, maxSubLoops = 5) {
+        let currentList = [...chunks];
+        let changed = true;
+        let loopCount = 0;
+        while (changed && loopCount < maxSubLoops) {
+            changed = false;
+            let newList = [];
+            for (let chunk of currentList) {
+                const result = cutByPreposition(chunk, maxSize);
+                if (result.success) {
+                    newList.push(...result.parts);
+                    changed = true;
+                } else {
+                    newList.push(chunk);
+                }
+            }
+            currentList = newList;
+            loopCount++;
+            if (!changed) break;
+        }
+        return currentList;
+    }
+
+    // ==================== BƯỚC 5: CẮT THÔNG MINH ====================
+    function cutBySmartFixed(chunk, maxSize, cutSize) {
+        const words = chunk.split(' ');
+        const totalWords = words.length;
+        if (totalWords <= maxSize) {
+            return { success: false, parts: [chunk] };
+        }
+        let takeFirst = cutSize;
+        if (totalWords - takeFirst < 2) {
+            takeFirst = totalWords - 2;
+        }
+        if (takeFirst <= 0) {
+            return { success: false, parts: [chunk] };
+        }
+        let cutPos = 0;
+        for (let i = 0; i < takeFirst; i++) {
+            cutPos += words[i].length + (i > 0 ? 1 : 0);
+        }
+        if (isCutInsideProtectedBoundary(chunk, cutPos)) {
+            for (let tryTake = takeFirst - 1; tryTake >= Math.floor(takeFirst / 2); tryTake--) {
+                let tryCutPos = 0;
+                for (let i = 0; i < tryTake; i++) {
+                    tryCutPos += words[i].length + (i > 0 ? 1 : 0);
+                }
+                if (!isCutInsideProtectedBoundary(chunk, tryCutPos)) {
+                    cutPos = tryCutPos;
+                    break;
+                }
+            }
+        }
+        const firstPart = chunk.substring(0, cutPos).trim();
+        const secondPart = chunk.substring(cutPos).trim();
+        if (firstPart.length > 0 && secondPart.length > 0 && !isCutInsideProtectedBoundary(chunk, cutPos)) {
+            return { success: true, parts: [firstPart, secondPart] };
+        }
+        return { success: false, parts: [chunk] };
+    }
+
+    function processStep5(chunks, maxSize, cutSize) {
+        let newList = [];
+        for (let chunk of chunks) {
+            const result = cutBySmartFixed(chunk, maxSize, cutSize);
+            if (result.success) {
+                newList.push(...result.parts);
+            } else {
+                newList.push(chunk);
+            }
+        }
+        return newList;
+    }
+
+    // ==================== BƯỚC 6: KIỂM TRA ĐỘ DÀI ====================
+    function cutByForce(chunk, maxSize) {
+        const words = chunk.split(' ');
+        const totalWords = words.length;
+        if (totalWords <= maxSize) {
+            return { success: false, parts: [chunk] };
+        }
+        let cutPos = 0;
+        for (let i = 0; i < maxSize; i++) {
+            cutPos += words[i].length + (i > 0 ? 1 : 0);
+        }
+        if (isCutInsideProtectedBoundary(chunk, cutPos)) {
+            for (let trySize = maxSize - 1; trySize >= Math.floor(maxSize / 2); trySize--) {
+                let tryCutPos = 0;
+                for (let i = 0; i < trySize; i++) {
+                    tryCutPos += words[i].length + (i > 0 ? 1 : 0);
+                }
+                if (!isCutInsideProtectedBoundary(chunk, tryCutPos)) {
+                    cutPos = tryCutPos;
+                    break;
+                }
+            }
+        }
+        const firstPart = chunk.substring(0, cutPos).trim();
+        const secondPart = chunk.substring(cutPos).trim();
+        if (firstPart.length > 0 && secondPart.length > 0 && !isCutInsideProtectedBoundary(chunk, cutPos)) {
+            return { success: true, parts: [firstPart, secondPart] };
+        }
+        return { success: false, parts: [chunk] };
+    }
+
+    function processStep6(chunks, maxSize) {
+        let newList = [];
+        let changed = false;
+        for (let chunk of chunks) {
+            const result = cutByForce(chunk, maxSize);
+            if (result.success) {
+                newList.push(...result.parts);
+                changed = true;
+            } else {
+                newList.push(chunk);
+            }
+        }
+        return { chunks: newList, changed: changed };
+    }
+
+    // ==================== 6 BƯỚC - 4 VÒNG LẶP CHÍNH ====================
+    function processOneFullLoop(chunks, maxSize, cutSize) {
+        let result = processStep1WithLoop(chunks, 5);
+        result = processStep2WithLoop(result, 5);
+        result = processStep3WithLoop(result, 5);
+        result = processStep4WithLoop(result, maxSize, 5);
+        result = processStep5(result, maxSize, cutSize);
+        const step6Result = processStep6(result, maxSize);
+        return step6Result;
+    }
+
+    function splitWithSixLoopsAndFourCycles(sentence, level) {
+        const maxSize = getMaxChunkSize(level);
+        const cutSize = getCutSizeForStep5(level);
+        let chunks = [sentence];
+        const maxCycles = 4;
+        for (let cycle = 0; cycle < maxCycles; cycle++) {
+            const result = processOneFullLoop(chunks, maxSize, cutSize);
+            let changed = (result.chunks.length !== chunks.length);
+            if (!changed) {
+                for (let i = 0; i < result.chunks.length; i++) {
+                    if (result.chunks[i] !== chunks[i]) {
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+            chunks = result.chunks;
+            if (!changed || !result.changed) {
+                break;
+            }
+        }
+        return chunks.filter(c => c.trim().length > 0);
+    }
+
+    // ==================== Tách câu từ đoạn văn ====================
+    function splitIntoSentences(text) {
+        if (!text.trim()) return [];
+        let sentences = text.match(/[^.!?]+[.!?]+/g);
+        if (!sentences || sentences.length === 0) return [text.trim()];
+        return sentences.map(s => s.trim()).filter(s => s.length > 0);
+    }
+
+    let currentSentences = [], currentChunks = [];
     
-    function getMaxChunkSize(level) { return level === 'light' ? 12 : (level === 'moderate' ? 6 : 4); }
-    function getCutSizeForStep5(level) { return level === 'light' ? 9 : (level === 'moderate' ? 5 : 3); }
+    function buildAllChunks(sentences, level) {
+        resetProtectedBoundaries();
+        for (let phrase of FIXED_PHRASES) {
+            addProtectedBoundary(phrase);
+        }
+        const maxSize = getMaxChunkSize(level);
+        const allChunks = [];
+        for (let i = 0; i < sentences.length; i++) {
+            const sentence = sentences[i];
+            const wordCount = sentence.split(' ').length;
+            const shouldSplit = naturalPauseToggle.checked && wordCount > maxSize;
+            if (shouldSplit) {
+                const chunks = splitWithSixLoopsAndFourCycles(sentence, level);
+                for (let j = 0; j < chunks.length; j++) {
+                    allChunks.push({ text: chunks[j], sentenceIdx: i, originalSentence: sentence });
+                }
+            } else {
+                allChunks.push({ text: sentence, sentenceIdx: i, originalSentence: sentence });
+            }
+        }
+        return allChunks;
+    }
+
+    // ==================== Audio Core (ĐÃ SỬA ĐỂ MOBILE HOẠT ĐỘNG) ====================
+    let activePlayback = { cancelled: false };
+    let repeatCount = 2, delaySec = 1, repeatDelaySec = 0.3;
+    let availableVoices = [];
+    let isSpeechInitialized = false;
+
+    function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
     
-    const FIXED_PHRASES = ['as well as','as far as','in spite of','in front of','in addition to','in case of','in lieu of','in light of','in place of','in terms of','in view of','on account of','on behalf of','on top of','with regard to','with respect to','as long as','as soon as','even if','even though','provided that','so that','the most of','welcome to','just like','such as','because of','instead of','due to','prior to','together with','along with','apart from','according to','ahead of','aside from','contrary to','except for','inside of','outside of','owing to','regardless of','subsequent to','thanks to','a lot of','lots of','kind of','type of','sort of','look like','feel like','sound like','taste like','seem like','want to','need to','have to','used to','going to','ought to','supposed to','able to','wants to','needs to','has to','wanted to','needed to','had to','looks like','feels like','sounds like','tastes like','seems like','such that','proud of','more than'];
-    FIXED_PHRASES.sort((a,b)=>b.split(' ').length - a.split(' ').length);
-    for (let phrase of FIXED_PHRASES) addProtectedBoundary(phrase);
+    function createUtterance(text) {
+        if (!text) return null;
+        const utterance = new SpeechSynthesisUtterance(text);
+        const selectedVoice = voiceSelect.value;
+        if (selectedVoice && availableVoices.length) {
+            const found = availableVoices.find(v => v.voiceURI === selectedVoice || v.name === selectedVoice);
+            if (found) utterance.voice = found;
+        }
+        utterance.rate = 0.92;
+        utterance.lang = 'en-US';
+        return utterance;
+    }
+
+    // HÀM SẮP XẾP GIỌNG THEO NỀN TẢNG (LẤY TỪ FILE MẪU CỦA BẠN)
+    function sortVoicesByPlatform(voices) {
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (isIOS) {
+            const samanthaIndex = voices.findIndex(v => v.name.toLowerCase().includes('samantha'));
+            if (samanthaIndex !== -1) {
+                const samantha = voices[samanthaIndex];
+                const otherVoices = voices.filter((_, idx) => idx !== samanthaIndex);
+                return [samantha, ...otherVoices];
+            }
+            return voices;
+        } else {
+            const googleVoices = voices.filter(v => v.name.toLowerCase().includes('google'));
+            const microsoftVoices = voices.filter(v => v.name.toLowerCase().includes('microsoft'));
+            const otherVoices = voices.filter(v => !v.name.toLowerCase().includes('google') && !v.name.toLowerCase().includes('microsoft'));
+            return [...googleVoices, ...microsoftVoices, ...otherVoices];
+        }
+    }
+
+    function populateVoiceList() {
+        if (!('speechSynthesis' in window)) return;
+        const voices = speechSynthesis.getVoices();
+        if (!voices.length) return;
+        
+        availableVoices = sortVoicesByPlatform(voices);
+        
+        const selected = voiceSelect.value;
+        voiceSelect.innerHTML = '';
+        
+        availableVoices.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v.voiceURI;
+            opt.textContent = v.name + (v.lang ? ` (${v.lang})` : '');
+            if (v.name.toLowerCase().includes('google') || v.name.toLowerCase().includes('samantha') || v.name.toLowerCase().includes('david')) {
+                opt.selected = true;
+            }
+            voiceSelect.appendChild(opt);
+        });
+        
+        if (selected && availableVoices.some(v => v.voiceURI === selected || v.name === selected)) {
+            voiceSelect.value = selected;
+        } else if (availableVoices.length > 0) {
+            const defaultVoice = availableVoices.find(v => v.lang === 'en-US') || availableVoices[0];
+            if (defaultVoice) voiceSelect.value = defaultVoice.voiceURI;
+        }
+    }
+
+    async function playChunkSequence(chunks, repeat, delayMs, repeatDelayMs, cancelToken) {
+        for (let i = 0; i < chunks.length; i++) {
+            if (cancelToken.cancelled) break;
+            for (let r = 0; r < repeat; r++) {
+                if (cancelToken.cancelled) break;
+                const utterance = createUtterance(chunks[i]);
+                if (utterance) {
+                    await new Promise(res => { 
+                        utterance.onend = res; 
+                        utterance.onerror = res; 
+                        speechSynthesis.cancel(); 
+                        speechSynthesis.speak(utterance); 
+                    });
+                }
+                if (r < repeat - 1 && !cancelToken.cancelled) await delay(repeatDelayMs);
+            }
+            if (i < chunks.length - 1 && !cancelToken.cancelled) await delay(delayMs);
+        }
+    }
+
+    async function startSequentialPlayback() {
+        if (currentChunks.length === 0) { alert("Không có nội dung."); return; }
+        stopAndReset();
+        const token = { cancelled: false };
+        activePlayback = token;
+        const chunksTexts = currentChunks.map(c => c.text);
+        await playChunkSequence(chunksTexts, repeatCount, delaySec * 1000, repeatDelaySec * 1000, token);
+        if (!token.cancelled) resetPlayState();
+    }
     
-    const STEP3_WORDS = ['which','who','that','when','where','whom','what','how','and','or','but','so','for','nor','yet','because','since','although','though','whereas','while','if','unless','whenever','as','once','until','till','even though','then','however','therefore','consequently','furthermore','moreover','nevertheless','accordingly','hence','thus'];
-    const PREPOSITIONS = ['aboard','about','above','absent','across','after','against','along','alongside','amid','amidst','among','amongst','anti','around','as','astride','at','atop','bar','barring','before','behind','below','beneath','beside','besides','between','beyond','by','circa','concerning','considering','despite','down','during','except','excepting','excluding','far','following','for','from','given','in','including','inside','into','less','like','low','minus','near','nearer','nearest','notwithstanding','of','on','onto','opposite','out','outside','over','past','per','plus','regarding','respecting','round','save','saving','since','than','through','throughout','till','toward','towards','under','underneath','unlike','until','up','to','upon','versus','via','with','within','without','each','every'];
+    function stopAndReset() { 
+        if (activePlayback) activePlayback.cancelled = true; 
+        speechSynthesis.cancel(); 
+        activePlayback = { cancelled: false };
+    }
     
-    function cutByPunctuation(text) { const punctChars=[',',';',':']; for(let i=0;i<text.length;i++){ if(punctChars.includes(text[i])){ let cutPos=i+1; if(!isCutInsideProtectedBoundary(text,cutPos)){ let first=text.substring(0,cutPos).trim(),second=text.substring(cutPos).trim(); if(first&&second) return {success:true, parts:[first,second]}; } } } return {success:false, parts:[text]}; }
-    function processStep1WithLoop(chunks, maxSub=5){ let list=[...chunks], changed=true, loop=0; while(changed && loop<maxSub){ changed=false; let newList=[]; for(let c of list){ let res=cutByPunctuation(c); if(res.success){ newList.push(...res.parts); changed=true; }else newList.push(c); } list=newList; loop++; } return list; }
-    function protectFixedPhrases(text){ let result=[text], changed=true, maxPass=10; while(changed && maxPass--){ changed=false; let newParts=[]; for(let part of result){ let found=false; let lowerPart=part.toLowerCase(); for(let phrase of FIXED_PHRASES){ let idx=lowerPart.indexOf(phrase); if(idx!==-1){ let beforeText=part.substring(0,idx).trim(); let beforeWords=beforeText.length?beforeText.split(/\s+/).length:0; if(beforeWords===1 && idx>0){ let lastSpace=part.lastIndexOf(' ',idx-1); let startPos=(lastSpace===-1)?0:lastSpace+1; let oneWord=part.substring(startPos,idx).trim(); let combined=oneWord+' '+phrase; addProtectedBoundary(combined); let cutPos=startPos+combined.length; if(cutPos<part.length){ let before=part.substring(0,cutPos).trim(), after=part.substring(cutPos).trim(); if(before&&after){ newParts.push(before,after); found=true; changed=true; break; } }else{ newParts.push(part); found=true; break; } } let cutAfter=idx+phrase.length; if(cutAfter<part.length && !isCutInsideProtectedBoundary(part,cutAfter)){ let before=part.substring(0,cutAfter).trim(), after=part.substring(cutAfter).trim(); if(before&&after){ newParts.push(before,after); found=true; changed=true; break; } } if(beforeWords>1 && idx>0 && !isCutInsideProtectedBoundary(part,idx)){ let before=part.substring(0,idx).trim(), after=part.substring(idx).trim(); if(before&&after){ newParts.push(before,after); found=true; changed=true; break; } } } } if(!found) newParts.push(part); } result=newParts; } return result.filter(p=>p.length>0); }
-    function processStep2WithLoop(chunks, maxSub=5){ let list=[...chunks], changed=true, loop=0; while(changed && loop<maxSub){ changed=false; let newList=[]; for(let c of list){ let res=protectFixedPhrases(c); if(res.length!==1 || res[0]!==c){ newList.push(...res); changed=true; } else newList.push(c); } list=newList; loop++; } return list; }
-    function cutByConnector(text){ for(let conn of STEP3_WORDS){ let regex=new RegExp(`^(.*?)\\s+(${conn})([,.;:!?]?)\\s+(.*)$`,'i'); let match=text.match(regex); if(match && match[1].trim().length>0){ let before=match[1].trim(), connector=match[2], punct=match[3], after=match[4].trim(); let cutPos=before.length+1; if(!isCutInsideProtectedBoundary(text,cutPos)){ let parts=punct?[before,connector+punct,after]:[before,connector+' '+after]; if(parts.every(p=>p.length)) return {success:true, parts}; } } } return {success:false, parts:[text]}; }
-    function processStep3WithLoop(chunks, maxSub=5){ let list=[...chunks], changed=true, loop=0; while(changed && loop<maxSub){ changed=false; let newList=[]; for(let c of list){ let res=cutByConnector(c); if(res.success){ newList.push(...res.parts); changed=true; }else newList.push(c); } list=newList; loop++; } return list; }
-    function cutByPreposition(text, maxSize){ let words=text.split(' '); if(words.length<=maxSize) return {success:false, parts:[text]}; for(let i=0;i<words.length;i++){ let lower=words[i].toLowerCase().replace(/[,.;:!?]$/,''); if(PREPOSITIONS.includes(lower)){ let cutPos=0; for(let j=0;j<i;j++) cutPos+=words[j].length+(j>0?1:0); if(!isCutInsideProtectedBoundary(text,cutPos)){ let first=text.substring(0,cutPos).trim(), second=text.substring(cutPos).trim(); if(first&&second) return {success:true, parts:[first,second]}; } } } return {success:false, parts:[text]}; }
-    function processStep4WithLoop(chunks, maxSize, maxSub=5){ let list=[...chunks], changed=true, loop=0; while(changed && loop<maxSub){ changed=false; let newList=[]; for(let c of list){ let res=cutByPreposition(c,maxSize); if(res.success){ newList.push(...res.parts); changed=true; }else newList.push(c); } list=newList; loop++; } return list; }
-    function cutBySmartFixed(chunk, maxSize, cutSize){ let words=chunk.split(' '); if(words.length<=maxSize) return {success:false, parts:[chunk]}; let take=cutSize; if(words.length-take<2) take=words.length-2; if(take<=0) return {success:false, parts:[chunk]}; let cutPos=0; for(let i=0;i<take;i++) cutPos+=words[i].length+(i>0?1:0); if(isCutInsideProtectedBoundary(chunk,cutPos)){ for(let t=take-1; t>=Math.floor(take/2); t--){ let pos=0; for(let i=0;i<t;i++) pos+=words[i].length+(i>0?1:0); if(!isCutInsideProtectedBoundary(chunk,pos)){ cutPos=pos; break; } } } let first=chunk.substring(0,cutPos).trim(), second=chunk.substring(cutPos).trim(); if(first&&second && !isCutInsideProtectedBoundary(chunk,cutPos)) return {success:true, parts:[first,second]}; return {success:false, parts:[chunk]}; }
-    function processStep5(chunks, maxSize, cutSize){ let newList=[]; for(let c of chunks){ let res=cutBySmartFixed(c,maxSize,cutSize); if(res.success) newList.push(...res.parts); else newList.push(c); } return newList; }
-    function cutByForce(chunk, maxSize){ let words=chunk.split(' '); if(words.length<=maxSize) return {success:false, parts:[chunk]}; let cutPos=0; for(let i=0;i<maxSize;i++) cutPos+=words[i].length+(i>0?1:0); if(isCutInsideProtectedBoundary(chunk,cutPos)){ for(let sz=maxSize-1; sz>=Math.floor(maxSize/2); sz--){ let pos=0; for(let i=0;i<sz;i++) pos+=words[i].length+(i>0?1:0); if(!isCutInsideProtectedBoundary(chunk,pos)){ cutPos=pos; break; } } } let first=chunk.substring(0,cutPos).trim(), second=chunk.substring(cutPos).trim(); if(first&&second && !isCutInsideProtectedBoundary(chunk,cutPos)) return {success:true, parts:[first,second]}; return {success:false, parts:[chunk]}; }
-    function processStep6(chunks, maxSize){ let newList=[], changed=false; for(let c of chunks){ let res=cutByForce(c,maxSize); if(res.success){ newList.push(...res.parts); changed=true; }else newList.push(c); } return {chunks:newList, changed}; }
-    function processOneFullLoop(chunks, maxSize, cutSize){ let r=processStep1WithLoop(chunks,5); r=processStep2WithLoop(r,5); r=processStep3WithLoop(r,5); r=processStep4WithLoop(r,maxSize,5); r=processStep5(r,maxSize,cutSize); let step6=processStep6(r,maxSize); return step6; }
-    function splitWithSixLoopsAndFourCycles(sentence, level){ let maxSize=getMaxChunkSize(level), cutSize=getCutSizeForStep5(level); let chunks=[sentence]; for(let cycle=0;cycle<4;cycle++){ let res=processOneFullLoop(chunks,maxSize,cutSize); let changed=res.chunks.length!==chunks.length; if(!changed) for(let i=0;i<res.chunks.length;i++) if(res.chunks[i]!==chunks[i]){ changed=true; break; } chunks=res.chunks; if(!changed || !res.changed) break; } return chunks.filter(c=>c.trim().length>0); }
-    function splitIntoSentences(text){ if(!text.trim()) return []; let sents=text.match(/[^.!?]+[.!?]+/g); if(!sents) return [text.trim()]; return sents.map(s=>s.trim()).filter(s=>s.length>0); }
-    let currentSentences=[], currentChunks=[];
-    function buildAllChunks(sentences, level){ resetProtectedBoundaries(); for(let p of FIXED_PHRASES) addProtectedBoundary(p); let maxSize=getMaxChunkSize(level), all=[]; for(let i=0;i<sentences.length;i++){ let sent=sentences[i]; let shouldSplit=naturalPauseToggle.checked && sent.split(' ').length>maxSize; if(shouldSplit){ let chunks=splitWithSixLoopsAndFourCycles(sent,level); for(let ch of chunks) all.push({text:ch, sentenceIdx:i, originalSentence:sent}); } else all.push({text:sent, sentenceIdx:i, originalSentence:sent}); } return all; }
+    function resetPlayState() { activePlayback = { cancelled: false }; }
     
-    let activePlayback={cancelled:false}, repeatCount=2, delaySec=1, repeatDelaySec=0.3, availableVoices=[];
-    function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
-    function createUtterance(text){ if(!text) return null; let utter=new SpeechSynthesisUtterance(text); if(voiceSelect.value && availableVoices.length){ let found=availableVoices.find(v=>v.name===voiceSelect.value); if(found) utter.voice=found; } utter.rate=0.92; return utter; }
-    async function playChunkSequence(chunks, repeat, delayMs, repeatDelayMs, cancelToken){ for(let i=0;i<chunks.length;i++){ if(cancelToken.cancelled) break; for(let r=0;r<repeat;r++){ if(cancelToken.cancelled) break; let u=createUtterance(chunks[i]); if(u){ await new Promise(res=>{ u.onend=res; u.onerror=res; speechSynthesis.cancel(); speechSynthesis.speak(u); }); } if(r<repeat-1 && !cancelToken.cancelled) await delay(repeatDelayMs); } if(i<chunks.length-1 && !cancelToken.cancelled) await delay(delayMs); } }
-    async function startSequentialPlayback(){ if(!currentChunks.length){ alert("Không có nội dung."); return; } stopAndReset(); let token={cancelled:false}; activePlayback=token; let texts=currentChunks.map(c=>c.text); await playChunkSequence(texts,repeatCount,delaySec*1000,repeatDelaySec*1000,token); if(!token.cancelled) resetPlayState(); }
-    function stopAndReset(){ if(activePlayback) activePlayback.cancelled=true; speechSynthesis.cancel(); activePlayback={cancelled:false}; }
-    function resetPlayState(){ activePlayback={cancelled:false}; }
+    // ==================== DỊCH THUẬT ====================
+    let translationDebounceTimer = null;
+    let sentenceTranslations = [];
+    let chunksBySentenceForTranslate = [];
+
+    async function translateTextToVietnamese(text) {
+        if (!text.trim()) return "";
+        const encodedText = encodeURIComponent(text);
+        const url = `https://lingva.ml/api/v1/en/vi/${encodedText}`;
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 8000);
+            const response = await fetch(url, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            if (response.ok) {
+                const data = await response.json();
+                if (data && data.translation) {
+                    let translated = data.translation;
+                    translated = translated.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+                    if (translated && translated !== text) return translated;
+                }
+            }
+        } catch (error) { console.log("Lingva API error", error); }
+        try {
+            const myMemoryUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|vi`)}`;
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 8000);
+            const response = await fetch(myMemoryUrl, { signal: controller.signal });
+            clearTimeout(timeoutId);
+            if (response.ok) {
+                const data = await response.json();
+                let translated = data?.responseData?.translatedText || "";
+                if (translated && translated !== text) {
+                    translated = translated.replace(/&#39;/g, "'").replace(/&quot;/g, '"');
+                    return translated;
+                }
+            }
+        } catch (error) { console.log("Fallback API error", error); }
+        return `[Tạm dịch] ${text}`;
+    }
+
+    async function translateSentenceAndChunks(sentenceIdx, sentenceText, chunksTexts) {
+        const fullTranslation = await translateTextToVietnamese(sentenceText);
+        const chunkTranslations = [];
+        for (let i = 0; i < chunksTexts.length; i++) {
+            chunkTranslations.push(await translateTextToVietnamese(chunksTexts[i]));
+            if (i < chunksTexts.length - 1) await delay(100);
+        }
+        sentenceTranslations[sentenceIdx] = { full: fullTranslation, chunks: chunkTranslations };
+        updateTranslationDisplay();
+    }
+
+    async function performTranslation() {
+        const text = textarea.value;
+        if (!text.trim()) { sentenceTranslations = []; updateTranslationDisplay(); return; }
+        const sentences = splitIntoSentences(text);
+        if (sentences.length === 0) { sentenceTranslations = []; updateTranslationDisplay(); return; }
+        const chunksData = buildAllChunks(sentences, pauseLevelSelect.value);
+        chunksBySentenceForTranslate = [];
+        for (let i = 0; i < sentences.length; i++) {
+            chunksBySentenceForTranslate.push(chunksData.filter(c => c.sentenceIdx === i).map(c => c.text));
+        }
+        sentenceTranslations = sentences.map(() => ({ full: null, chunks: [] }));
+        updateTranslationDisplay();
+        for (let i = 0; i < sentences.length; i++) {
+            translateSentenceAndChunks(i, sentences[i], chunksBySentenceForTranslate[i]);
+            if (i < sentences.length - 1) await delay(200);
+        }
+    }
     
-    let translationDebounce=null, sentenceTranslations=[], chunksBySentenceForTranslate=[];
-    async function translateTextToVietnamese(text){ if(!text.trim()) return ""; try{ let url=`https://lingva.ml/api/v1/en/vi/${encodeURIComponent(text)}`; let ctrl=new AbortController(); let id=setTimeout(()=>ctrl.abort(),8000); let resp=await fetch(url,{signal:ctrl.signal}); clearTimeout(id); if(resp.ok){ let data=await resp.json(); if(data?.translation && data.translation!==text) return data.translation.replace(/&#39;/g,"'").replace(/&quot;/g,'"'); } }catch(e){} try{ let mmUrl=`https://api.allorigins.win/raw?url=${encodeURIComponent(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|vi`)}`; let ctrl=new AbortController(); let id=setTimeout(()=>ctrl.abort(),8000); let resp=await fetch(mmUrl,{signal:ctrl.signal}); clearTimeout(id); if(resp.ok){ let data=await resp.json(); let trans=data?.responseData?.translatedText; if(trans && trans!==text) return trans.replace(/&#39;/g,"'").replace(/&quot;/g,'"'); } }catch(e){} return `[Tạm dịch] ${text}`; }
-    async function translateSentenceAndChunks(idx,sentText,chunkTexts){ let full=await translateTextToVietnamese(sentText); let chunkTrans=[]; for(let t of chunkTexts) chunkTrans.push(await translateTextToVietnamese(t)); sentenceTranslations[idx]={full, chunks:chunkTrans}; updateTranslationDisplay(); }
-    async function performTranslation(){ let text=textarea.value; if(!text.trim()){ sentenceTranslations=[]; updateTranslationDisplay(); return; } let sents=splitIntoSentences(text); if(!sents.length) return; let chunksData=buildAllChunks(sents,pauseLevelSelect.value); chunksBySentenceForTranslate=[]; for(let i=0;i<sents.length;i++) chunksBySentenceForTranslate.push(chunksData.filter(c=>c.sentenceIdx===i).map(c=>c.text)); sentenceTranslations=sents.map(()=>({full:null,chunks:[]})); updateTranslationDisplay(); for(let i=0;i<sents.length;i++){ translateSentenceAndChunks(i,sents[i],chunksBySentenceForTranslate[i]); if(i<sents.length-1) await delay(200); } }
-    function scheduleTranslation(){ if(translationDebounce) clearTimeout(translationDebounce); translationDebounce=setTimeout(()=>performTranslation(),500); }
-    function updateTranslationDisplay(){ if(!translationContainer) return; if(!sentenceTranslations.length){ translationContainer.innerHTML='<div style="color:gray;text-align:center;padding:2rem;">⏳ Đang tải bản dịch...</div>'; return; } let html=''; for(let i=0;i<sentenceTranslations.length;i++){ let t=sentenceTranslations[i]; if(!t.full){ html+=`<div class="translation-item"><div class="translation-main"><span class="translation-number">${i+1}</span><span class="translation-text"><i class="fas fa-spinner fa-pulse"></i> Đang dịch...</span></div></div>`; continue; } html+=`<div class="translation-item"><div class="translation-main"><span class="translation-number">${i+1}</span><span class="translation-text">${escapeHtml(t.full)}</span></div>`; if(t.chunks?.length>1){ html+=`<div class="translation-chunk-list">`; for(let j=0;j<t.chunks.length;j++) html+=`<div class="translation-chunk-badge">📝 ${j+1}. ${escapeHtml(t.chunks[j])}</div>`; html+=`</div>`; } html+=`</div>`; } translationContainer.innerHTML=html; }
-    function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+    function scheduleTranslation() { 
+        if (translationDebounceTimer) clearTimeout(translationDebounceTimer); 
+        translationDebounceTimer = setTimeout(() => performTranslation(), 500); 
+    }
     
-    function updatePanelsFromText(rawText){ originalDisplay.innerText=rawText||"(chưa có nội dung)"; let sents=splitIntoSentences(rawText); currentSentences=sents; currentChunks=buildAllChunks(sents,pauseLevelSelect.value); if(!sents.length){ sentencesContainer.innerHTML='<div style="text-align:center;color:gray;">📭 Không tìm thấy câu nào</div>'; return; } sentencesContainer.innerHTML=''; sents.forEach((sent,idx)=>{ let div=document.createElement('div'); div.className='sentence-item'; let main=document.createElement('div'); main.className='sentence-main'; let playBtn=document.createElement('button'); playBtn.className='sentence-play'; playBtn.innerHTML='<i class="fas fa-play-circle"></i>'; playBtn.onclick=async (e)=>{ e.stopPropagation(); stopAndReset(); let token={cancelled:false}; activePlayback=token; await playChunkSequence([sent],repeatCount,delaySec*1000,repeatDelaySec*1000,token); }; let textSpan=document.createElement('span'); textSpan.className='sentence-text'; let maxSize=getMaxChunkSize(pauseLevelSelect.value); let isLong=sent.split(' ').length>maxSize; textSpan.innerText=`${idx+1}. ${sent} ${isLong?'📏':''}`; main.appendChild(playBtn); main.appendChild(textSpan); let chunksOfThis=currentChunks.filter(c=>c.sentenceIdx===idx); if(isLong && naturalPauseToggle.checked && chunksOfThis.length>1){ let listBtn=document.createElement('button'); listBtn.className='chunk-list-play-btn'; listBtn.innerHTML='<i class="fas fa-head-side-headphones"></i> 🎧'; listBtn.onclick=async (e)=>{ e.stopPropagation(); stopAndReset(); let token={cancelled:false}; activePlayback=token; await playChunkSequence(chunksOfThis.map(c=>c.text),repeatCount,delaySec*1000,repeatDelaySec*1000,token); }; main.appendChild(listBtn); } div.appendChild(main); if(isLong && naturalPauseToggle.checked && chunksOfThis.length>1){ let chunkDiv=document.createElement('div'); chunkDiv.className='chunk-list'; chunksOfThis.forEach((ch,ci)=>{ let badge=document.createElement('span'); badge.className='chunk-badge'; badge.innerText=`${ci+1}. ${ch.text}`; badge.onclick=async (e)=>{ e.stopPropagation(); stopAndReset(); let token={cancelled:false}; activePlayback=token; await playChunkSequence([ch.text],repeatCount,delaySec*1000,repeatDelaySec*1000,token); }; chunkDiv.appendChild(badge); }); div.appendChild(chunkDiv); } sentencesContainer.appendChild(div); }); }
-    function onTextChange(){ updatePanelsFromText(textarea.value); stopAndReset(); scheduleTranslation(); }
-    function refreshChunks(){ if(currentSentences.length){ currentChunks=buildAllChunks(currentSentences,pauseLevelSelect.value); updatePanelsFromText(textarea.value); } }
-    let activeDictPopup=null; function closeDictPopup(){ if(activeDictPopup){ activeDictPopup.remove(); activeDictPopup=null; } }
-    async function onDoubleClickWord(e){ let sel=window.getSelection().toString().trim(); if(!sel) return; let match=sel.match(/[a-zA-Z]+(?:[-'][a-zA-Z]+)*/); if(!match) return; let word=match[0]; if(word.length<2) return; showDictPopup(word,e.clientX,e.clientY,'<div><i class="fas fa-spinner fa-pulse"></i> Đang tra...</div>'); try{ let res=await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`); if(!res.ok) throw new Error(); let data=await res.json(); let entry=data[0]; let phonetic=entry.phonetic||(entry.phonetics?.[0]?.text)||""; let meaningHtml=''; for(let m of entry.meanings.slice(0,2)){ meaningHtml+=`<div><strong>${m.partOfSpeech}</strong><ul>`; for(let def of m.definitions.slice(0,2)){ meaningHtml+=`<li>${escapeHtml(def.definition)}</li>`; if(def.example) meaningHtml+=`<div class="dict-example">📌 "${escapeHtml(def.example)}"</div>`; } meaningHtml+=`</ul></div>`; } let content=`${phonetic?`<div class="dict-phonetic">/${escapeHtml(phonetic)}/</div>`:''}<div class="dict-meaning">${meaningHtml}</div>`; if(activeDictPopup){ activeDictPopup.querySelector('.dict-word').innerHTML=`📖 ${escapeHtml(word)}`; let old=activeDictPopup.querySelector('.dict-phonetic, .dict-meaning, .dict-error'); if(old) old.remove(); activeDictPopup.insertAdjacentHTML('beforeend',content); }else showDictPopup(word,e.clientX,e.clientY,content); }catch(e){ if(activeDictPopup) activeDictPopup.querySelector('.dict-word').innerHTML=`📖 ${escapeHtml(word)}`; let errDiv='<div class="dict-error">❌ Không tìm thấy từ</div>'; if(activeDictPopup){ let old=activeDictPopup.querySelector('.dict-phonetic, .dict-meaning, .dict-error'); if(old) old.remove(); activeDictPopup.insertAdjacentHTML('beforeend',errDiv); }else showDictPopup(word,e.clientX,e.clientY,errDiv); } }
-    function showDictPopup(word,x,y,html){ closeDictPopup(); let popup=document.createElement('div'); popup.className='dict-popup'; popup.style.left=(x+10)+'px'; popup.style.top=(y+10)+'px'; popup.innerHTML=`<button class="close-dict"><i class="fas fa-times"></i> Đóng</button><div class="dict-word">📖 ${escapeHtml(word)}</div>${html}`; document.body.appendChild(popup); activeDictPopup=popup; popup.querySelector('.close-dict').onclick=()=>closeDictPopup(); setTimeout(()=>{ let handler=(e)=>{ if(activeDictPopup && !activeDictPopup.contains(e.target)){ closeDictPopup(); document.removeEventListener('click',handler); } }; document.addEventListener('click',handler); },50); let rect=popup.getBoundingClientRect(); if(rect.right>window.innerWidth) popup.style.left=(window.innerWidth-rect.width-10)+'px'; if(rect.bottom>window.innerHeight) popup.style.top=(y-rect.height-10)+'px'; }
-    function bindDictEvents(){ let orig=document.getElementById('originalTextDisplay'); let sentList=document.getElementById('sentencesList'); if(orig) orig.removeEventListener('dblclick',onDoubleClickWord); if(sentList) sentList.removeEventListener('dblclick',onDoubleClickWord); if(orig) orig.addEventListener('dblclick',onDoubleClickWord); if(sentList) sentList.addEventListener('dblclick',onDoubleClickWord); }
-    function populateVoiceList(){ let voices=speechSynthesis.getVoices(); if(!voices.length) return; availableVoices=voices; let selected=voiceSelect.value; voiceSelect.innerHTML=''; voices.forEach(v=>{ let opt=document.createElement('option'); opt.value=v.name; opt.textContent=v.name+(v.lang?` (${v.lang})`:'');
-            voiceSelect.appendChild(opt); }); if(selected && voices.some(v=>v.name===selected)) voiceSelect.value=selected; else{ let defaultEn=voices.find(v=>v.lang==='en-US'); if(defaultEn) voiceSelect.value=defaultEn.name; } }
-    function getRuleContent(level){ let maxSize=getMaxChunkSize(level), cutSize=getCutSizeForStep5(level); return `<div><h4><i class="fas fa-gavel"></i> QUY TẮC CHUẨN: 6 BƯỚC - 4 VÒNG LẶP (v2.0) <span class="dynamic-badge">+ BẢO VỆ RANH GIỚI</span></h4></div><div class="step-box"><div class="step-title">📌 CÁC MỨC ĐỘ CẮT</div><table class="rule-table"><tr><th>Mức</th><th>Số từ tối đa</th><th>Cắt Bước 5</th></tr><tr><td>🌿 Nhẹ</td><td>12 từ</td><td>9 từ</td></tr><tr><td>⭐ Vừa</td><td>6 từ</td><td>5 từ</td></tr><tr><td>⚡ Mạnh</td><td>4 từ</td><td>3 từ</td></tr></table></div><div class="step-box"><div class="step-title">🛡️ BẢO VỆ RANH GIỚI</div><div>Không cắt bên trong cụm cố định gốc hoặc ranh giới động (1 từ + cụm gốc).</div></div>`; }
-    function updateRulePanel(){ rulePanel.innerHTML=getRuleContent(pauseLevelSelect.value); }
+    function refreshTranslation() { performTranslation(); }
     
-    pauseLevelSelect.addEventListener('change',()=>{ updateRulePanel(); if(currentSentences.length) refreshChunks(); });
-    ruleToggleBtn.addEventListener('click',()=>{ rulePanel.classList.toggle('show'); ruleToggleBtn.innerHTML=rulePanel.classList.contains('show')?'<i class="fas fa-eye-slash"></i> Ẩn quy tắc':'<i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0 + Bảo vệ ranh giới)'; if(rulePanel.classList.contains('show')) updateRulePanel(); });
-    textarea.addEventListener('input',onTextChange);
-    playSequentialBtn.addEventListener('click',startSequentialPlayback);
-    pauseBtn.addEventListener('click',()=>{ if(activePlayback) activePlayback.cancelled=true; speechSynthesis.cancel(); });
-    stopBtn.addEventListener('click',stopAndReset);
-    refreshTranslationBtn.addEventListener('click',()=>performTranslation());
-    naturalPauseToggle.addEventListener('change',()=>{ refreshChunks(); stopAndReset(); scheduleTranslation(); });
-    repeatSelect.addEventListener('change',()=>{ repeatCount=parseInt(repeatSelect.value); });
-    delaySelect.addEventListener('change',()=>{ delaySec=parseFloat(delaySelect.value); });
-    repeatDelaySelect.addEventListener('change',()=>{ repeatDelaySec=parseFloat(repeatDelaySelect.value); });
-    if(typeof speechSynthesis !=='undefined'){ speechSynthesis.onvoiceschanged=populateVoiceList; setTimeout(populateVoiceList,200); populateVoiceList(); }
-    textarea.value=SAMPLE_TEXT;
+    function updateTranslationDisplay() {
+        if (!translationContainer) return;
+        if (sentenceTranslations.length === 0) {
+            translationContainer.innerHTML = '<div style="color:gray; text-align:center; padding:2rem;">⏳ Đang tải bản dịch...</div>';
+            return;
+        }
+        let html = '';
+        for (let i = 0; i < sentenceTranslations.length; i++) {
+            const trans = sentenceTranslations[i];
+            const hasFull = trans.full !== null;
+            const chunks = trans.chunks || [];
+            const hasChunks = chunks.length > 1;
+            if (!hasFull) {
+                html += `<div class="translation-item"><div class="translation-main"><span class="translation-number">${i+1}</span><span class="translation-text"><i class="fas fa-spinner fa-pulse"></i> Đang dịch...</span></div></div>`;
+                continue;
+            }
+            html += `<div class="translation-item"><div class="translation-main"><span class="translation-number">${i+1}</span><span class="translation-text">${escapeHtml(trans.full)}</span></div>`;
+            if (hasChunks && chunks.length > 0) {
+                html += `<div class="translation-chunk-list">`;
+                for (let j = 0; j < chunks.length; j++) {
+                    html += `<div class="translation-chunk-badge">📝 ${j+1}. ${escapeHtml(chunks[j])}</div>`;
+                }
+                html += `</div>`;
+            }
+            html += `</div>`;
+        }
+        translationContainer.innerHTML = html;
+    }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m]));
+    }
+    
+    // ==================== UI UPDATE ====================
+    function updatePanelsFromText(rawText) {
+        originalDisplay.innerText = rawText || "(chưa có nội dung)";
+        const sentences = splitIntoSentences(rawText);
+        currentSentences = sentences;
+        currentChunks = buildAllChunks(sentences, pauseLevelSelect.value);
+        
+        if (!sentences.length) {
+            sentencesContainer.innerHTML = `<div style="text-align:center; color:gray;">📭 Không tìm thấy câu nào</div>`;
+            return;
+        }
+        
+        sentencesContainer.innerHTML = '';
+        sentences.forEach((sentence, idx) => {
+            const sentenceDiv = document.createElement('div');
+            sentenceDiv.className = 'sentence-item';
+            
+            const mainDiv = document.createElement('div');
+            mainDiv.className = 'sentence-main';
+            
+            const playBtn = document.createElement('button');
+            playBtn.className = 'sentence-play';
+            playBtn.innerHTML = '<i class="fas fa-play-circle"></i>';
+            playBtn.onclick = async (e) => { 
+                e.stopPropagation();
+                stopAndReset(); 
+                const token = { cancelled: false }; 
+                activePlayback = token; 
+                await playChunkSequence([sentence], repeatCount, delaySec*1000, repeatDelaySec*1000, token); 
+            };
+            
+            const textSpan = document.createElement('span');
+            textSpan.className = 'sentence-text';
+            const maxSize = getMaxChunkSize(pauseLevelSelect.value);
+            const isLong = sentence.split(' ').length > maxSize;
+            textSpan.innerText = `${idx+1}. ${sentence} ${isLong ? '📏' : ''}`;
+            
+            mainDiv.appendChild(playBtn);
+            mainDiv.appendChild(textSpan);
+            
+            const chunksOfThisSentence = currentChunks.filter(c => c.sentenceIdx === idx);
+            if (isLong && naturalPauseToggle.checked && chunksOfThisSentence.length > 1) {
+                const chunkListPlayBtn = document.createElement('button');
+                chunkListPlayBtn.className = 'chunk-list-play-btn';
+                chunkListPlayBtn.innerHTML = '<i class="fas fa-head-side-headphones"></i> 🎧';
+                chunkListPlayBtn.title = 'Nghe toàn bộ câu (từng cụm rời)';
+                const chunksTexts = chunksOfThisSentence.map(c => c.text);
+                chunkListPlayBtn.onclick = async (e) => { 
+                    e.stopPropagation();
+                    stopAndReset(); 
+                    const token = { cancelled: false }; 
+                    activePlayback = token; 
+                    await playChunkSequence(chunksTexts, repeatCount, delaySec*1000, repeatDelaySec*1000, token); 
+                };
+                mainDiv.appendChild(chunkListPlayBtn);
+            }
+            
+            sentenceDiv.appendChild(mainDiv);
+            
+            if (isLong && naturalPauseToggle.checked && chunksOfThisSentence.length > 1) {
+                const chunkListDiv = document.createElement('div');
+                chunkListDiv.className = 'chunk-list';
+                chunksOfThisSentence.forEach((chunk, ci) => {
+                    const badge = document.createElement('span');
+                    badge.className = 'chunk-badge';
+                    badge.innerText = `${ci+1}. ${chunk.text}`;
+                    badge.onclick = async (e) => { 
+                        e.stopPropagation();
+                        stopAndReset(); 
+                        const token = { cancelled: false }; 
+                        activePlayback = token; 
+                        await playChunkSequence([chunk.text], repeatCount, delaySec*1000, repeatDelaySec*1000, token); 
+                    };
+                    chunkListDiv.appendChild(badge);
+                });
+                sentenceDiv.appendChild(chunkListDiv);
+            }
+            
+            sentencesContainer.appendChild(sentenceDiv);
+        });
+    }
+    
+    function onTextChange() {
+        updatePanelsFromText(textarea.value);
+        stopAndReset();
+        scheduleTranslation();
+    }
+    
+    function refreshChunks() {
+        if (currentSentences.length) {
+            currentChunks = buildAllChunks(currentSentences, pauseLevelSelect.value);
+            updatePanelsFromText(textarea.value);
+        }
+    }
+    
+    // ==================== Từ điển popup ====================
+    let activeDictPopup = null;
+    function closeDictPopup() { if (activeDictPopup) { activeDictPopup.remove(); activeDictPopup = null; } }
+    
+    function showDictPopup(word, x, y, html) {
+        closeDictPopup();
+        const popup = document.createElement('div');
+        popup.className = 'dict-popup';
+        popup.style.left = (x + 10) + 'px';
+        popup.style.top = (y + 10) + 'px';
+        popup.innerHTML = `<button class="close-dict"><i class="fas fa-times"></i> Đóng</button><div class="dict-word">📖 ${escapeHtml(word)}</div>${html}`;
+        document.body.appendChild(popup);
+        activeDictPopup = popup;
+        popup.querySelector('.close-dict').onclick = () => closeDictPopup();
+        setTimeout(() => {
+            const handler = (e) => { if (activeDictPopup && !activeDictPopup.contains(e.target)) { closeDictPopup(); document.removeEventListener('click', handler); } };
+            document.addEventListener('click', handler);
+        }, 50);
+        const rect = popup.getBoundingClientRect();
+        if (rect.right > window.innerWidth) popup.style.left = (window.innerWidth - rect.width - 10) + 'px';
+        if (rect.bottom > window.innerHeight) popup.style.top = (y - rect.height - 10) + 'px';
+    }
+    
+    async function lookupWord(word) {
+        if (!/^[a-zA-Z]+(?:[-'][a-zA-Z]+)*$/.test(word)) return null;
+        try {
+            const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`);
+            if (!res.ok) return { error: `Không tìm thấy "${word}"` };
+            const data = await res.json();
+            const entry = data[0];
+            const phonetic = entry.phonetic || (entry.phonetics?.[0]?.text) || "";
+            let meaningHtml = '';
+            for (let m of entry.meanings.slice(0, 2)) {
+                meaningHtml += `<div><strong>${m.partOfSpeech}</strong><ul>`;
+                for (let def of m.definitions.slice(0, 2)) {
+                    meaningHtml += `<li>${escapeHtml(def.definition)}</li>`;
+                    if (def.example) meaningHtml += `<div class="dict-example">📌 "${escapeHtml(def.example)}"</div>`;
+                }
+                meaningHtml += `</ul></div>`;
+            }
+            return { phonetic, meaningHtml };
+        } catch(e) { return { error: "Lỗi kết nối" }; }
+    }
+    
+    async function onDoubleClickWord(e) {
+        const selection = window.getSelection().toString().trim();
+        if (!selection) return;
+        const match = selection.match(/[a-zA-Z]+(?:[-'][a-zA-Z]+)*/);
+        if (!match) return;
+        const word = match[0];
+        if (word.length < 2) return;
+        showDictPopup(word, e.clientX, e.clientY, '<div><i class="fas fa-spinner fa-pulse"></i> Đang tra...</div>');
+        const result = await lookupWord(word);
+        const content = result.error ? `<div class="dict-error">${escapeHtml(result.error)}</div>` : `${result.phonetic ? `<div class="dict-phonetic">/${escapeHtml(result.phonetic)}/</div>` : ''}<div class="dict-meaning">${result.meaningHtml}</div>`;
+        if (activeDictPopup) {
+            activeDictPopup.querySelector('.dict-word').innerHTML = `📖 ${escapeHtml(word)}`;
+            const old = activeDictPopup.querySelector('.dict-phonetic, .dict-meaning, .dict-error');
+            if (old) old.remove();
+            activeDictPopup.insertAdjacentHTML('beforeend', content);
+        } else showDictPopup(word, e.clientX, e.clientY, content);
+    }
+    
+    function bindDictionaryEvents() {
+        const orig = document.getElementById('originalTextDisplay');
+        const sent = document.getElementById('sentencesList');
+        if (orig) orig.removeEventListener('dblclick', onDoubleClickWord);
+        if (sent) sent.removeEventListener('dblclick', onDoubleClickWord);
+        if (orig) orig.addEventListener('dblclick', onDoubleClickWord);
+        if (sent) sent.addEventListener('dblclick', onDoubleClickWord);
+    }
+    
+    // ==================== Voice list với xử lý mobile ====================
+    function initVoices() {
+        if (typeof speechSynthesis !== 'undefined') {
+            if (speechSynthesis.getVoices().length > 0) {
+                populateVoiceList();
+            }
+            speechSynthesis.onvoiceschanged = function() {
+                populateVoiceList();
+            };
+        }
+    }
+    
+    // ==================== NỘI DUNG QUY TẮC CHUẨN ====================
+    function getRuleContent(level) {
+        const maxSize = getMaxChunkSize(level);
+        const cutSize = getCutSizeForStep5(level);
+        
+        const fullPrepositionsList = PREPOSITIONS.join(', ');
+        const fixedPhrasesList = FIXED_PHRASES.join(', ');
+        const step3WordsList = STEP3_WORDS.join(', ');
+        
+        return `
+            <div><h4><i class="fas fa-gavel"></i> QUY TẮC CHUẨN: 6 BƯỚC - 4 VÒNG LẶP (v2.0) <span class="dynamic-badge">+ BẢO VỆ RANH GIỚI</span></h4></div>
+            
+            <div class="step-box"><div class="step-title">📌 CÁC MỨC ĐỘ CẮT</div>
+            <table class="rule-table">
+                <tr><th>Mức</th><th>Ký hiệu</th><th>Số từ tối đa/cụm (maxSize)</th><th>Cắt Bước 5 (lấy số từ đầu)</th><th>Phù hợp</th></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">🌿</td><td><strong>Nhẹ</strong></td><td>12 từ</td><td>9 từ</td><td>Người mới bắt đầu, đọc hiểu</td></tr>
+                <tr><td style="background:#ff9800; color:white; text-align:center;">⭐</td><td><strong>Vừa</strong></td><td>6 từ</td><td>5 từ</td><td>Trình độ trung cấp, luyện nghe</td></tr>
+                <tr><td style="background:#f44336; color:white; text-align:center;">⚡</td><td><strong>Mạnh</strong></td><td>4 từ</td><td>3 từ</td><td>Luyện phát âm chi tiết</td></tr>
+            </table>
+            </div>
+            
+            <div class="step-box"><div class="step-title">🛡️ HỆ THỐNG BẢO VỆ RANH GIỚI (KHÔNG CẮT BÊN TRONG)</div>
+            <div><strong>Loại 1 - CỤM CỐ ĐỊNH GỐC (KHÔNG BAO GIỜ THAY ĐỔI):</strong><br>
+            <code style="font-size:0.7rem; word-break:break-all;">${fixedPhrasesList}</code></div>
+            <div style="margin-top:10px;"><strong>Loại 2 - RANH GIỚI BẢO VỆ ĐỘNG (SINH RA TRONG BƯỚC 2):</strong><br>
+            Khi phát hiện <strong style="color:#c2410c;">chỉ có 1 từ duy nhất đứng trước một cụm cố định gốc</strong>, hệ thống sẽ:<br>
+            • Gộp thành ranh giới bảo vệ mới (ví dụ: "teenagers need to" từ "teenagers" + "need to")<br>
+            • <strong>KHÔNG cắt bên trong</strong> ranh giới này (không cắt giữa "teenagers" và "need to")<br>
+            • Nhưng VẪN CÓ THỂ cắt <strong>TRƯỚC</strong> hoặc <strong>SAU</strong> ranh giới bảo vệ
+            </div>
+            <div class="rule-example">Ví dụ: "To stay healthy, teenagers need to build habits" (mức Vừa - max 6 từ)<br>
+            → Ranh giới bảo vệ "teenagers need to" (3 từ, không bị cắt bên trong)<br>
+            → Kết quả: "To stay healthy," (3 từ) + "teenagers need to" (3 từ) + "build habits" (2 từ)
+            </div>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📋 DANH SÁCH TỪ NỐI (Bước 3)</div>
+            <code style="font-size:0.7rem; word-break:break-all;">${step3WordsList}</code>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📋 DANH SÁCH GIỚI TỪ (Bước 4)</div>
+            <code style="font-size:0.7rem; word-break:break-all;">${fullPrepositionsList}</code>
+            </div>
+            
+            <div class="step-box"><div class="step-title">🔄 6 BƯỚC XỬ LÝ TRONG VÒNG LẶP CHÍNH</div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">1</span> BƯỚC 1: DẤU CÂU</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>Cách cắt:</strong> Cắt <strong>SAU</strong> dấu phẩy (,), chấm phẩy (;), hai chấm (:)</div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Không cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">2</span> BƯỚC 2: CỤM CỐ ĐỊNH <span class="dynamic-badge">TẠO RANH GIỚI BẢO VỆ ĐỘNG</span></div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>Nguyên tắc 1:</strong> <span style="color:#c2410c;">TUYỆT ĐỐI KHÔNG</span> cắt bên trong cụm cố định gốc</div>
+            <div>• <strong>Nguyên tắc 2 (MỚI):</strong> Nếu <strong>chỉ có 1 từ</strong> đứng trước cụm cố định gốc → tạo ranh giới bảo vệ mới (1 từ + cụm gốc)</div>
+            <div>• <strong>Nguyên tắc 3:</strong> Ưu tiên cắt <strong>SAU</strong> toàn bộ cụm (kể cả cụm đã gộp)</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">3</span> BƯỚC 3: TỪ NỐI</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>CÓ dấu câu sau</strong> → <strong>TÁCH RIÊNG</strong> từ nối (kèm dấu)</div>
+            <div>• <strong>KHÔNG có dấu sau</strong> → <strong>GỘP</strong> từ nối với cụm phía sau</div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Không cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">4</span> BƯỚC 4: GIỚI TỪ</div>
+            <div>• <strong>Vòng lặp con:</strong> 5 lần</div>
+            <div>• <strong>Điều kiện:</strong> CHỈ cắt khi số từ trong cụm <strong>> maxSize</strong></div>
+            <div>• <strong>Cách cắt:</strong> Cắt <strong>TRƯỚC</strong> giới từ</div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Không cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">5</span> BƯỚC 5: CẮT THÔNG MINH</div>
+            <div>• <strong>Điều kiện:</strong> CHỈ cắt khi số từ trong cụm <strong>> maxSize</strong></div>
+            <div>• <strong>Cách cắt:</strong> Cắt lấy <strong>${cutSize} từ đầu</strong></div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Tự động điều chỉnh vị trí cắt để tránh cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title"><span class="step-number">6</span> BƯỚC 6: KIỂM TRA ĐỘ DÀI</div>
+            <div>• Đảm bảo <strong>không có cụm nào > maxSize</strong></div>
+            <div>• <strong>🛡️ Bảo vệ:</strong> Tự động điều chỉnh vị trí cắt để tránh cắt bên trong ranh giới bảo vệ</div>
+            </div>
+            </div>
+            
+            <div class="principle-box"><div class="step-title">✅ 7 NGUYÊN TẮC VÀNG</div>
+            <table class="rule-table">
+                <tr><th>STT</th><th>Nguyên tắc</th><th>Mô tả</th></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">1</td><td><strong>Không gộp lại</strong></td><td>Đã cắt thì giữ nguyên</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">2</td><td><strong>Chỉ cắt khi cần</strong></td><td>Bước 4,5,6 chỉ cắt khi số từ > maxSize</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">3</td><td><strong>Ranh giới bất khả xâm phạm</strong></td><td>Không cắt bên trong ranh giới bảo vệ</td></tr>
+                <tr><td style="background:#c2410c; color:white; text-align:center;">4</td><td><strong>1 từ + cụm gốc → tạo ranh giới mới</strong></td><td>Gộp và thêm vào danh sách bảo vệ</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">5</td><td><strong>Giới từ gộp với phía sau</strong></td><td>Khi cắt tại giới từ → giới từ thuộc phần phía sau</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">6</td><td><strong>Từ nối không dấu → gộp</strong></td><td>Gộp từ nối với cụm phía sau</td></tr>
+                <tr><td style="background:#4caf50; color:white; text-align:center;">7</td><td><strong>Vòng lặp con xử lý triệt để</strong></td><td>Bước 1-4 có vòng lặp con 5 lần</td></tr>
+            </table>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📊 VÍ DỤ MINH HỌA (Mức Vừa - max 6 từ)</div>
+            <div><strong>Câu:</strong> "To stay healthy, teenagers need to build good daily habits."</div>
+            <div><strong>Kết quả sau xử lý:</strong></div>
+            <div>1. To stay healthy,</div>
+            <div>2. teenagers need to</div>
+            <div>3. build good daily habits.</div>
+            </div>
+            
+            <div class="step-box"><div class="step-title">📌 GHI CHÚ QUAN TRỌNG</div>
+            <div>• Ranh giới bảo vệ động <strong>KHÔNG chặn cắt</strong> ở đầu hoặc cuối cụm</div>
+            <div>• Mục tiêu: Đảm bảo mỗi cụm ≤ maxSize nhưng vẫn giữ nguyên các cặp từ quan trọng</div>
+            </div>
+        `;
+    }
+    
+    function updateRulePanel() { rulePanel.innerHTML = getRuleContent(pauseLevelSelect.value); }
+    
+    // ==================== Khởi tạo sự kiện ====================
+    pauseLevelSelect.addEventListener('change', () => { updateRulePanel(); if (currentSentences.length) refreshChunks(); });
+    ruleToggleBtn.addEventListener('click', () => { 
+        rulePanel.classList.toggle('show'); 
+        ruleToggleBtn.innerHTML = rulePanel.classList.contains('show') ? '<i class="fas fa-eye-slash"></i> Ẩn quy tắc' : '<i class="fas fa-graduation-cap"></i> Giải thích quy tắc (6 bước - 4 vòng lặp chuẩn v2.0 + Bảo vệ ranh giới)'; 
+        if (rulePanel.classList.contains('show')) updateRulePanel(); 
+    });
+    textarea.addEventListener('input', onTextChange);
+    playSequentialBtn.addEventListener('click', startSequentialPlayback);
+    pauseBtn.addEventListener('click', () => { if (activePlayback) activePlayback.cancelled = true; speechSynthesis.cancel(); });
+    stopBtn.addEventListener('click', stopAndReset);
+    refreshTranslationBtn.addEventListener('click', refreshTranslation);
+    naturalPauseToggle.addEventListener('change', () => { refreshChunks(); stopAndReset(); scheduleTranslation(); });
+    repeatSelect.addEventListener('change', () => { repeatCount = parseInt(repeatSelect.value); });
+    delaySelect.addEventListener('change', () => { delaySec = parseFloat(delaySelect.value); });
+    repeatDelaySelect.addEventListener('change', () => { repeatDelaySec = parseFloat(repeatDelaySelect.value); });
+    
+    // Khởi tạo voice với xử lý mobile
+    initVoices();
+    
+    textarea.value = SAMPLE_TEXT;
     onTextChange();
-    repeatCount=parseInt(repeatSelect.value);
-    delaySec=parseFloat(delaySelect.value);
-    repeatDelaySec=parseFloat(repeatDelaySelect.value);
-    bindDictEvents();
+    repeatCount = parseInt(repeatSelect.value);
+    delaySec = parseFloat(delaySelect.value);
+    repeatDelaySec = parseFloat(repeatDelaySelect.value);
+    bindDictionaryEvents();
     updateRulePanel();
 </script>
 </body>
